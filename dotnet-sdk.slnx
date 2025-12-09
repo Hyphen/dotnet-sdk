@@ -1,0 +1,19 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+  </Configurations>
+  <Folder Name="/meta/">
+    <File Path=".editorconfig" />
+    <File Path=".gitignore" />
+    <File Path="global.json" />
+  </Folder>
+  <Folder Name="/samples/">
+    <Project Path="samples/NetInfoSample/NetInfoSample.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Hyphen.Sdk/Hyphen.Sdk.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/Hyphen.Sdk.Tests/Hyphen.Sdk.Tests.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,7 @@
+{
+  "csharp.semanticHighlighting.enabled": true,
+  "dotnet.automaticallyCreateSolutionInWorkspace": false,
+  "dotnet.testWindow.useTestingPlatformProtocol": true,
+  "omnisharp.enableEditorConfigSupport": true,
+  "task.autoDetect": "off"
+}
