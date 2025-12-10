@@ -23,7 +23,10 @@ public static class HyphenSdkServiceCollectionExtensions
 			.AddOptionsWithValidateOnStart<NetInfoOptions>()
 			.Configure(options =>
 			{
-				options.BaseUri ??= new("https://net.info");
+				if (BaseService.IsDevEnvironment)
+					options.BaseUri ??= new("https://dev.net.info");
+				else
+					options.BaseUri ??= new("https://net.info");
 			})
 			.ValidateApiKey();
 

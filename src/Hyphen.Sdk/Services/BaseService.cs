@@ -12,6 +12,8 @@ namespace Hyphen.Sdk;
 /// <param name="options">The base service options</param>
 public abstract class BaseService(IHttpClientFactory httpClientFactory, ILogger logger, IOptions<BaseServiceOptions> options)
 {
+	static readonly Lazy<bool> isDevEnvironment = new(() => Environment.GetEnvironmentVariable("HYPHEN_DEV")?.Equals("true", StringComparison.OrdinalIgnoreCase) == true);
+
 	/// <summary>
 	/// Gets the API key used to make service requests.
 	/// </summary>
@@ -21,6 +23,8 @@ public abstract class BaseService(IHttpClientFactory httpClientFactory, ILogger 
 	/// Gets the HTTP client factory used to make HTTP clients for service requests.
 	/// </summary>
 	protected IHttpClientFactory HttpClientFactory { get; } = Guard.ArgumentNotNull(httpClientFactory);
+
+	internal static bool IsDevEnvironment => isDevEnvironment.Value;
 
 	/// <summary>
 	/// Gets the logger used to log messages.
