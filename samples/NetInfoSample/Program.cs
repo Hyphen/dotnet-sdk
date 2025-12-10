@@ -25,5 +25,32 @@ using var host = builder.Build();
 
 // Get the NetInfo service
 var netInfo = host.Services.GetRequiredService<INetInfo>();
-var result = await netInfo.GetIPInfo("65.102.191.139");
-Console.WriteLine($"ip = {result.IP}, type = {result.Type}, error = {result.ErrorMessage ?? "null"}, location = {JsonSerializer.Serialize(result.Location)}");
+
+// Get information about a single IP address
+var result = await (
+	args.Length > 0
+		? netInfo.GetIPInfo(args[0])  // Print the IP address passed on the command line...
+		: netInfo.GetIPInfo()         // ...or the current public IP, if one wasn't passed
+);
+
+Console.WriteLine($"IP address '{result.IP}' is type '{result.Type}'");
+
+if (result.ErrorMessage is not null)
+	Console.Error.WriteLine($"Error: {result.ErrorMessage}");
+
+if (result.Location is not null)
+{
+	Console.WriteLine($"Location: (ID = {result.Location.GeoNameId})");
+	Console.WriteLine($"  Latitude:    {result.Location.Latitude}");
+	Console.WriteLine($"  Longitude:   {result.Location.Longitude}");
+	if (result.Location.Country.Length > 0)
+		Console.WriteLine($"  Country:     {result.Location.Country}");
+	if (result.Location.Region.Length > 0)
+		Console.WriteLine($"  Region:      {result.Location.Region}");
+	if (result.Location.City.Length > 0)
+		Console.WriteLine($"  City:        {result.Location.City}");
+	if (result.Location.PostalCode.Length > 0)
+		Console.WriteLine($"  Postal Code: {result.Location.PostalCode}");
+	if (result.Location.TimeZone is not null)
+		Console.WriteLine($"  Time Zone:   {result.Location.TimeZone}");
+}
