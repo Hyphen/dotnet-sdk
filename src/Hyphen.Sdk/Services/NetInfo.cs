@@ -2,7 +2,6 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Hyphen.Sdk.Internal;
-using Hyphen.Sdk.Resources;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -15,28 +14,43 @@ internal class NetInfo(IHttpClientFactory httpClientFactory, ILogger<INetInfo> l
 
 	public async ValueTask<NetInfoResult[]> GetIPInfos(string[] ips, CancellationToken cancellationToken)
 	{
-		if (Guard.ArgumentNotNull(ips).Length < 1)
-			throw new ArgumentException(HyphenSdkResources.INVALID_IPS_ARRAY, nameof(ips));
-
 		var uri = new Uri(BaseUri, "ip");
 		var client = HttpClientFactory.CreateClient(nameof(INetInfo));
 		client.SetHyphenApiKey(ApiKey);
 
-		var response = await client.PostAsJsonAsync(uri, ips, cancellationToken).ConfigureAwait(false);
-		if (!response.IsSuccessStatusCode)
-			return WithError(ips, $"HTTP response code {(int)response.StatusCode} ({response.StatusCode})");
+		try
+		{
+			if (Guard.ArgumentNotNull(ips).Length == 0)
+			{
+				var result = await client.GetFromJsonAsync<NetInfoResult>(uri, cancellationToken).ConfigureAwait(false);
+				if (result is null)
+					return WithError(ips, "Could not deserialize response");
+
+				return [result];
+			}
+			else
+			{
+				var response = await client.PostAsJsonAsync(uri, ips, cancellationToken).ConfigureAwait(false);
+				if (!response.IsSuccessStatusCode)
+					return WithError(ips, $"HTTP response code {(int)response.StatusCode} ({response.StatusCode})");
 
 #if NET
-		var stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
+				var stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
 #else
-		var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+				var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
 #endif
 
-		var result = await JsonSerializer.DeserializeAsync<NetInfoPostResponse200>(stream, cancellationToken: cancellationToken).ConfigureAwait(false);
-		if (result is null)
-			return WithError(ips, "Could not deserialize response");
+				var result = await JsonSerializer.DeserializeAsync<NetInfoPostResponse200>(stream, cancellationToken: cancellationToken).ConfigureAwait(false);
+				if (result is null)
+					return WithError(ips, "Could not deserialize response");
 
-		return result.Data;
+				return result.Data;
+			}
+		}
+		catch (Exception ex)
+		{
+			return WithError(ips, ex.Message);
+		}
 	}
 
 	static NetInfoResult[] WithError(string[] ips, string errorMessage) =>

@@ -8,6 +8,20 @@ namespace Hyphen.Sdk;
 public static class HyphenSdkNetInfoExtensions
 {
 	/// <summary>
+	/// Gets information about the current computer's public IP address.
+	/// </summary>
+	/// <param name="netInfo"/>
+	/// <returns>
+	/// The return value will be populated with information about the IP address if a lookup
+	/// was successful, or error information if the lookup was unsuccessful.
+	/// </returns>
+	/// <remarks>
+	/// This API supports both IPv4 and IPv6 addresses.
+	/// </remarks>
+	public static async ValueTask<NetInfoResult> GetIPInfo(this INetInfo netInfo) =>
+		(await Guard.ArgumentNotNull(netInfo).GetIPInfos([], default).ConfigureAwait(false))[0];
+
+	/// <summary>
 	/// Gets information about a single IP address.
 	/// </summary>
 	/// <param name="netInfo"/>

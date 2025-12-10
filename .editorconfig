@@ -14,4 +14,5 @@ indent_size = 2
 
 [*.cs]
 # Analyzer severity
+dotnet_diagnostic.CA1031.severity  = none  # Do not catch general exception types
 dotnet_diagnostic.IDE0130.severity = none  # We use folders for organization, not to indicate namespaces
