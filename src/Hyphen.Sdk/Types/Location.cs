@@ -38,6 +38,12 @@ public class Location
 	public required decimal Longitude { get; set; }
 
 	/// <summary>
+	/// Gets or sets the location's postal code.
+	/// </summary>
+	[JsonPropertyName("postalCode")]
+	public required string PostalCode { get; set; }
+
+	/// <summary>
 	/// Gets or sets the location's region.
 	/// </summary>
 	[JsonPropertyName("region")]
