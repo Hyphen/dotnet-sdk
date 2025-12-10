@@ -11,7 +11,7 @@ builder
 // Add NetInfo service
 builder.Services.AddNetInfo();
 
-// Config option 1: Add NetInfo service with settings from appsettings.json
+// Config option 1: Configure via appsettings.json
 builder.Services.Configure<NetInfoOptions>(builder.Configuration.GetSection("NetInfo"));
 
 // Config option 2: Configure via code
