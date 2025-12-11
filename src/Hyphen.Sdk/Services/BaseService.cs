@@ -1,6 +1,4 @@
 using Hyphen.Sdk.Internal;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace Hyphen.Sdk;
 
@@ -12,19 +10,30 @@ namespace Hyphen.Sdk;
 /// <param name="options">The base service options</param>
 public abstract class BaseService(IHttpClientFactory httpClientFactory, ILogger logger, IOptions<BaseServiceOptions> options)
 {
-	static readonly Lazy<bool> isDevEnvironment = new(() => Environment.GetEnvironmentVariable("HYPHEN_DEV")?.Equals("true", StringComparison.OrdinalIgnoreCase) == true);
+	/// <summary>
+	/// A list of case-insensitive values that indicate a value is falsey.
+	/// </summary>
+	static internal readonly HashSet<string?> FalseValues = new(StringComparer.OrdinalIgnoreCase) { "false", "off", "no", "0" };
+
+	/// <summary>
+	/// A list of case-insensitive values that indicate a value is truthy.
+	/// </summary>
+	static internal readonly HashSet<string?> TrueValues = new(StringComparer.OrdinalIgnoreCase) { "true", "on", "yes", "1" };
 
 	/// <summary>
 	/// Gets the API key used to make service requests.
 	/// </summary>
-	protected string ApiKey { get; } = Guard.ArgumentNotNull(options).Value.ApiKey;
+	protected ApiKey ApiKey { get; } = new(Guard.ArgumentNotNull(options).Value.ApiKey);
 
 	/// <summary>
 	/// Gets the HTTP client factory used to make HTTP clients for service requests.
 	/// </summary>
 	protected IHttpClientFactory HttpClientFactory { get; } = Guard.ArgumentNotNull(httpClientFactory);
 
-	internal static bool IsDevEnvironment => isDevEnvironment.Value;
+	/// <summary>
+	/// Gets a flag indicating whether environment variable <c>HYPHEN_DEV</c> is truthy.
+	/// </summary>
+	internal static bool IsDevEnvironment => TrueValues.Contains(Environment.GetEnvironmentVariable(HyphenEnv.Dev));
 
 	/// <summary>
 	/// Gets the logger used to log messages.

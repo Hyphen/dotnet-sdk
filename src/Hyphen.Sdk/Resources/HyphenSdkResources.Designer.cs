@@ -63,27 +63,45 @@ namespace Hyphen.Sdk.Resources {
         /// <summary>
         ///   Looks up a localized string similar to API key is required. Please provide it via options or set the HYPHEN_API_KEY environment variable..
         /// </summary>
-        internal static string API_KEY_REQUIRED {
+        internal static string ApiKeyRequired {
             get {
-                return ResourceManager.GetString("API_KEY_REQUIRED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The provided IPs array is invalid. It should be a non-empty array of strings..
-        /// </summary>
-        internal static string INVALID_IPS_ARRAY {
-            get {
-                return ResourceManager.GetString("INVALID_IPS_ARRAY", resourceCulture);
+                return ResourceManager.GetString("ApiKeyRequired", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The provided API key is a public API key. Please provide a valid non public API key for authentication..
         /// </summary>
-        internal static string PUBLIC_API_KEY_SHOULD_NOT_BE_USED {
+        internal static string ApiKeyShouldNotBePublic {
             get {
-                return ResourceManager.GetString("PUBLIC_API_KEY_SHOULD_NOT_BE_USED", resourceCulture);
+                return ResourceManager.GetString("ApiKeyShouldNotBePublic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Received HTTP response code {0} ({1}).
+        /// </summary>
+        internal static string HttpStatusCodeErrorFmt {
+            get {
+                return ResourceManager.GetString("HttpStatusCodeErrorFmt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The provided IPs array is invalid. It should be a non-empty array of strings..
+        /// </summary>
+        internal static string InvalidIPArray {
+            get {
+                return ResourceManager.GetString("InvalidIPArray", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The HTTP response appears to be malformed and could not be deserialized..
+        /// </summary>
+        internal static string ResponseMalformed {
+            get {
+                return ResourceManager.GetString("ResponseMalformed", resourceCulture);
             }
         }
     }

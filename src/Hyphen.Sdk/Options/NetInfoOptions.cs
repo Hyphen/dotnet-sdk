@@ -11,5 +11,5 @@ public class NetInfoOptions : BaseServiceOptions
 	/// <remarks>
 	/// If the value is not set, the service will default to <see href="https://net.info"/>.
 	/// </remarks>
-	public required Uri BaseUri { get; set; }
+	public Uri? BaseUri { get; set; }
 }

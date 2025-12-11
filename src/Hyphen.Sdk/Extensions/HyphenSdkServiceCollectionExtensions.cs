@@ -1,6 +1,5 @@
 using Hyphen.Sdk;
 using Hyphen.Sdk.Internal;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -16,27 +15,16 @@ public static class HyphenSdkServiceCollectionExtensions
 	/// <returns>The <see cref="IServiceCollection"/>.</returns>
 	public static IServiceCollection AddNetInfo(this IServiceCollection services)
 	{
-		RegisterDependencies(Guard.ArgumentNotNull(services));
-
-		services.TryAddSingleton<INetInfo, NetInfo>();
-		services
-			.AddOptionsWithValidateOnStart<NetInfoOptions>()
-			.Configure(options =>
-			{
-				if (BaseService.IsDevEnvironment)
-					options.BaseUri ??= new("https://dev.net.info");
-				else
-					options.BaseUri ??= new("https://net.info");
-			})
-			.ValidateApiKey();
+		Guard.ArgumentNotNull(services)
+			.RegisterDependencies()
+			.TryAddSingleton<INetInfo, NetInfo>();
 
 		return services;
 	}
 
-	static void RegisterDependencies(IServiceCollection services)
-	{
-		services.AddOptions();
-		services.AddLogging();
-		services.AddHttpClient();
-	}
+	static IServiceCollection RegisterDependencies(this IServiceCollection services) =>
+		services
+			.AddOptions()
+			.AddLogging()
+			.AddHttpClient();
 }

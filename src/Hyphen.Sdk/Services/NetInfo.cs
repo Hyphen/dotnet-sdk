@@ -1,64 +1,85 @@
 using System.Net.Http.Json;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using Hyphen.Sdk.Internal;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using Hyphen.Sdk.Resources;
 
 namespace Hyphen.Sdk;
 
 internal class NetInfo(IHttpClientFactory httpClientFactory, ILogger<INetInfo> logger, IOptions<NetInfoOptions> options)
 	: BaseService(httpClientFactory, logger, options), INetInfo
 {
-	protected Uri BaseUri { get; } = Guard.ArgumentNotNull(options).Value.BaseUri;
+	internal Uri BaseUri { get; } =
+		Guard.ArgumentNotNull(options).Value.BaseUri
+			?? (IsDevEnvironment ? new("https://dev.net.info") : new("https://net.info"));
 
-	public async ValueTask<NetInfoResult[]> GetIPInfos(string[] ips, CancellationToken cancellationToken)
+	public ValueTask<NetInfoResult[]> GetIPInfos(string[] ips, CancellationToken cancellationToken)
 	{
+		Guard.ArgumentNotNull(ips);
+
 		var uri = new Uri(BaseUri, "ip");
 		var client = HttpClientFactory.CreateClient(nameof(INetInfo));
 		client.SetHyphenApiKey(ApiKey);
 
+		if (ips.Length == 0)
+			return ProcessResponse<NetInfoResult>(
+				["unknown"],
+				() => client.GetAsync(uri, cancellationToken),
+				content => [content],
+				cancellationToken
+			);
+		else
+			return ProcessResponse<NetInfoPostResponse200>(
+				ips,
+				() => client.PostAsJsonAsync(uri, ips, cancellationToken),
+				content => content.Data,
+				cancellationToken
+			);
+	}
+
+	async static ValueTask<NetInfoResult[]> ProcessResponse<T>(
+		string[] ips,
+		Func<Task<HttpResponseMessage>> requestThunk,
+		Func<T, NetInfoResult[]> contentProcessor,
+		CancellationToken cancellationToken)
+	{
 		try
 		{
-			if (Guard.ArgumentNotNull(ips).Length == 0)
-			{
-				var result = await client.GetFromJsonAsync<NetInfoResult>(uri, cancellationToken).ConfigureAwait(false);
-				if (result is null)
-					return WithError(ips, "Could not deserialize response");
+			var response = await requestThunk().ConfigureAwait(false);
+			if (!response.IsSuccessStatusCode)
+				return WithError(ips, HyphenSdkResources.HttpStatusCodeError(response.StatusCode));
 
-				return [result];
-			}
-			else
-			{
-				var response = await client.PostAsJsonAsync(uri, ips, cancellationToken).ConfigureAwait(false);
-				if (!response.IsSuccessStatusCode)
-					return WithError(ips, $"HTTP response code {(int)response.StatusCode} ({response.StatusCode})");
-
-#if NET
-				var stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
+#if NETSTANDARD
+			var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
 #else
-				var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+			var stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
 #endif
 
-				var result = await JsonSerializer.DeserializeAsync<NetInfoPostResponse200>(stream, cancellationToken: cancellationToken).ConfigureAwait(false);
-				if (result is null)
-					return WithError(ips, "Could not deserialize response");
+			var body = await JsonSerializer.DeserializeAsync<T>(stream, cancellationToken: cancellationToken).ConfigureAwait(false);
+			if (body is null)
+				return WithError(ips, HyphenSdkResources.ResponseMalformed);
 
-				return result.Data;
-			}
+			var result = contentProcessor(body);
+
+			for (var idx = 0; idx < result.Length; ++idx)
+				if (result[idx] is null)
+					result[idx] = new NetInfoResult
+					{
+						IP = idx >= ips.Length ? "unknown" : ips[idx],
+						Type = IPType.Error,
+						ErrorMessage = HyphenSdkResources.ResponseMalformed
+					};
+
+			return result;
+		}
+		catch (JsonException)
+		{
+			return WithError(ips, HyphenSdkResources.ResponseMalformed);
 		}
 		catch (Exception ex)
 		{
-			return WithError(ips, ex.Message);
+			return WithError(ips, $"{ex.GetType().FullName}: {ex.Message}");
 		}
 	}
 
 	static NetInfoResult[] WithError(string[] ips, string errorMessage) =>
 		[.. ips.Select(ip => new NetInfoResult { IP = ip, Type = IPType.Error, ErrorMessage = errorMessage })];
-
-	class NetInfoPostResponse200
-	{
-		[JsonPropertyName("data")]
-		public required NetInfoResult[] Data { get; set; }
-	}
 }

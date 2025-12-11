@@ -1,5 +1,3 @@
-using Hyphen.Sdk.Internal;
-
 namespace Hyphen.Sdk;
 
 /// <summary>
@@ -14,11 +12,9 @@ public class BaseServiceOptions
 	/// <remarks>
 	/// If the value is not set, the service class will assume that the user has set the environment
 	/// variable <c>HYPHEN_API_KEY</c> with the API key. If neither value is set, the service class
-	/// will throw an error about the missing API key.
+	/// will throw an error about the missing API key.<br />
+	/// <br />
+	/// Note that public API keys (i.e., those starting with <c>"public_"</c>) are not supported.
 	/// </remarks>
-	public required string ApiKey
-	{
-		get => field;
-		set => field = Guard.ArgumentNotNull(value, nameof(ApiKey));
-	}
+	public string? ApiKey { get; set; }
 }
