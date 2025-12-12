@@ -1,0 +1,63 @@
+name: tests-report
+
+on:
+  workflow_run:
+    workflows: ['tests']
+    types: [completed]
+
+permissions:
+  actions: read
+  contents: read
+  pull-requests: write
+
+jobs:
+  tests-report:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Determine PR number
+      id: get_pr
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        SHA="${{ github.event.workflow_run.head_sha }}"
+        GHPR=$(gh pr list --state open --json number,headRefOid --jq ".[] | select(.headRefOid==\"${HEAD_SHA}\") | .number")
+        if [ -z "$GHPR" ]; then
+          echo "SHA ${SHA} is not associated with a GitHub PR; skipping some reports"
+        fi
+        echo "GHPR=$GHPR" >> $GITHUB_ENV
+
+    - name: Download tests artifact
+      uses: actions/download-artifact@v7
+      with:
+        name: test-results
+        run-id: ${{ github.event.workflow_run.id }}
+        path: artifacts
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Generate coverage report
+      uses: irongut/CodeCoverageSummary@v1
+      with:
+        filename: artifacts/coverage.cobertura.xml
+        badge: true
+        format: markdown
+        hide_branch_rate: false
+        hide_complexity: false
+        indicators: true
+        output: file
+
+    - name: Publish coverage report as PR comment
+      uses: marocchino/sticky-pull-request-comment@v2
+      if: env.GHPR != ''
+      with:
+        number: ${{ env.GHPR }}
+        path: code-coverage-results.md
+
+    - name: Publish test results report as PR comment
+      uses: ctrf-io/github-test-reporter@v1
+      if: env.GHPR != ''
+      with:
+        report-path: artifacts/tests.ctrf
+        issue: ${{ env.GHPR }}
+        pull-request-report: true
+        update-comment: true
+        comment-tag: test-report

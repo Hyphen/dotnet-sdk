@@ -1,0 +1,67 @@
+name: tests
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    env:
+      DOTNET_CLI_WORKLOAD_UPDATE_NOTIFY_DISABLE: true
+      DOTNET_NOLOGO: true
+    steps:
+    - name: Clone source
+      uses: actions/checkout@v4
+
+    - name: Install .NET SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x'
+
+    - name: Get .NET info
+      run: dotnet --info
+      continue-on-error: true
+
+    - name: Restore
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --no-restore --configuration Release
+
+    - name: Run tests with coverage
+      run: dotnet test --no-build --configuration Release --coverage --coverage-output-format cobertura --coverage-output coverage.cobertura.xml --report-ctrf --report-ctrf-filename tests.ctrf
+
+    - name: Generate coverage report
+      uses: irongut/CodeCoverageSummary@v1
+      with:
+        filename: test/Hyphen.Sdk.Tests/bin/Release/net8.0/TestResults/coverage.cobertura.xml
+        badge: true
+        format: markdown
+        hide_branch_rate: false
+        hide_complexity: false
+        indicators: true
+        output: console
+
+    - name: Publish test results report as Actions build summary
+      uses: ctrf-io/github-test-reporter@v1
+      if: always()
+      with:
+        report-path: test/Hyphen.Sdk.Tests/bin/Release/net8.0/TestResults/tests.ctrf
+        github-report: true
+        title: 'Test summary'
+
+    - name: Upload test artifacts
+      uses: actions/upload-artifact@v6
+      if: always()
+      with:
+        name: test-results
+        path: |
+          test/Hyphen.Sdk.Tests/bin/Release/net8.0/TestResults/coverage.cobertura.xml
+          test/Hyphen.Sdk.Tests/bin/Release/net8.0/TestResults/tests.ctrf
