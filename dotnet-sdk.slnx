@@ -1,11 +1,9 @@
 <Solution>
-  <Configurations>
-    <Platform Name="Any CPU" />
-  </Configurations>
   <Folder Name="/meta/">
     <File Path=".editorconfig" />
     <File Path=".gitignore" />
     <File Path="global.json" />
+    <File Path="README.md" />
   </Folder>
   <Folder Name="/samples/">
     <Project Path="samples/NetInfoSample/NetInfoSample.csproj" />
