@@ -23,7 +23,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         SHA="${{ github.event.workflow_run.head_sha }}"
-        GHPR=$(gh pr list --state open --json number,headRefOid --jq ".[] | select(.headRefOid==\"${HEAD_SHA}\") | .number")
+        GHPR=$(gh pr list --state open --json number,headRefOid --jq ".[] | select(.headRefOid==\"${SHA}\") | .number")
         if [ -z "$GHPR" ]; then
           echo "SHA ${SHA} is not associated with a GitHub PR; skipping some reports"
         fi
@@ -31,6 +31,7 @@ jobs:
 
     - name: Download tests artifact
       uses: actions/download-artifact@v7
+      if: env.GHPR != ''
       with:
         name: test-results
         run-id: ${{ github.event.workflow_run.id }}
@@ -39,6 +40,7 @@ jobs:
 
     - name: Generate coverage report
       uses: irongut/CodeCoverageSummary@v1.3.0
+      if: env.GHPR != ''
       with:
         filename: artifacts/coverage.cobertura.xml
         badge: true
