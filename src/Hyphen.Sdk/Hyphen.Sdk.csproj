@@ -4,6 +4,7 @@
   <PropertyGroup>
     <AnalysisLevel>latest-All</AnalysisLevel>
     <ContinuousIntegrationBuild Condition=" '$(GITHUB_ACTIONS)' == 'true' ">true</ContinuousIntegrationBuild>
+    <DebugType>embedded</DebugType>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
@@ -40,7 +41,7 @@
   <ItemGroup>
     <Using Include="Microsoft.Extensions.Configuration" />
     <Using Include="Microsoft.Extensions.DependencyInjection" />
-    <Using Include="Microsoft.Extensions.DependencyInjection.Extensions "/>
+    <Using Include="Microsoft.Extensions.DependencyInjection.Extensions " />
     <Using Include="Microsoft.Extensions.Options" />
     <Using Include="Microsoft.Extensions.Logging" />
     <Using Include="System.Text.Json" />
@@ -60,6 +61,10 @@
     <PackageReference Include="Microsoft.Extensions.Http" Version="10.0.1" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.1" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.1" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.1" />
     <PackageReference Include="System.Net.Http.Json" Version="10.0.1" />
     <PackageReference Include="System.Text.Json" Version="10.0.1" />
