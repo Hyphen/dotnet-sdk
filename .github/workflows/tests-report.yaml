@@ -64,7 +64,7 @@ jobs:
         report-path: artifacts/tests.ctrf
         issue: ${{ env.GHPR }}
         pull-request-report: true
-        update-comment: true
+        overwrite-comment: true
         comment-tag: test-report
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
