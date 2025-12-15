@@ -76,7 +76,7 @@ jobs:
         environment_name: PROD
 
     - name: Publish
-      run: dotnet nuget push artifacts/Hyphen.Sdk.${{ github.event.release.tag_name }}.nupkg -s https://api.nuget.org/v3/index.json -k {{ secrets.NUGET_API_KEY }}
+      run: dotnet nuget push artifacts/Hyphen.Sdk.${{ github.event.release.tag_name }}.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
