@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Hyphen.Sdk.Internal;
 
 namespace Hyphen.Sdk;
@@ -5,6 +6,7 @@ namespace Hyphen.Sdk;
 /// <summary>
 /// Extension methods for <see cref="INetInfo"/>.
 /// </summary>
+[ExcludeFromCodeCoverage]
 public static class HyphenSdkNetInfoExtensions
 {
 	/// <summary>

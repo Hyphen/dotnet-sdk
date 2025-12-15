@@ -1,8 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Hyphen.Sdk;
 
 /// <summary>
 /// Represents the options values that can be used to configure <see cref="NetInfo"/>.
 /// </summary>
+[ExcludeFromCodeCoverage]
 public class NetInfoOptions : BaseServiceOptions
 {
 	/// <summary>
