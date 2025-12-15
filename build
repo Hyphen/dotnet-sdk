@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+function write_error {
+	echo "error(1): $1" 2>&1
+	exit 1
+}
+
+builtin type -P dotnet &>/dev/null || write_error "Could not find 'dotnet'; please install the .NET SDK from https://dot.net/"
+
+dotnet restore
+dotnet build --no-restore --configuration Release
+dotnet test --no-build --configuration Release
