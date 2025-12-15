@@ -12,6 +12,9 @@ indent_style = tab
 indent_style = space
 indent_size = 2
 
+[*.slnx]
+end_of_line = crlf
+
 [*.cs]
 # Analyzer severity
 dotnet_diagnostic.CA1031.severity  = none  # Do not catch general exception types

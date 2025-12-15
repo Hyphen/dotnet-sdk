@@ -1,8 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <!-- Project properties -->
   <PropertyGroup>
     <AnalysisLevel>latest-All</AnalysisLevel>
     <ContinuousIntegrationBuild Condition=" '$(GITHUB_ACTIONS)' == 'true' ">true</ContinuousIntegrationBuild>
+    <DebugType>embedded</DebugType>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
@@ -13,12 +15,33 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Version Condition=" '$(Version)' == '' ">0.0.0</Version>
   </PropertyGroup>
+
+  <!-- Package properties -->
+  <PropertyGroup>
+    <Authors>Hyphen</Authors>
+    <Company>Hyphen AI</Company>
+    <Copyright>Copyright (c) Hyphen</Copyright>
+    <Description>Hyphen .NET SDK, supporting .NET Standard 2.0 and .NET 8+</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIconUrl>_content/logo-package.png</PackageIconUrl>
+    <PackageId>Hyphen.Sdk</PackageId>
+    <PackageReadmeFile>_content/README.md</PackageReadmeFile>
+    <Product>Hyphen AI</Product>
+    <RepositoryUrl>https://github.com/Hyphen/dotnet-sdk</RepositoryUrl>
+    <Title>Hyphen .NET SDK</Title>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Package/icon.png" Pack="true" PackagePath="_content/" />
+    <None Include="Package/README.md" Pack="true" PackagePath="_content/" />
+  </ItemGroup>
 
   <ItemGroup>
     <Using Include="Microsoft.Extensions.Configuration" />
     <Using Include="Microsoft.Extensions.DependencyInjection" />
-    <Using Include="Microsoft.Extensions.DependencyInjection.Extensions "/>
+    <Using Include="Microsoft.Extensions.DependencyInjection.Extensions " />
     <Using Include="Microsoft.Extensions.Options" />
     <Using Include="Microsoft.Extensions.Logging" />
     <Using Include="System.Text.Json" />
@@ -38,6 +61,10 @@
     <PackageReference Include="Microsoft.Extensions.Http" Version="10.0.1" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.1" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.1" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.1" />
     <PackageReference Include="System.Net.Http.Json" Version="10.0.1" />
     <PackageReference Include="System.Text.Json" Version="10.0.1" />

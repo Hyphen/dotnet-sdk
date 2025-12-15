@@ -4,3 +4,4 @@
 *.csproj text merge=union
 *.ico binary
 *.resx text merge=union
+*.slnx eol=crlf

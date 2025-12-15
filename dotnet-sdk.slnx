@@ -7,7 +7,13 @@
     <File Path="global.json" />
     <File Path="README.md" />
   </Folder>
+  <Folder Name="/meta/workflows/">
+    <File Path=".github/workflows/release.yaml" />
+    <File Path=".github/workflows/tests-report.yaml" />
+    <File Path=".github/workflows/tests.yaml" />
+  </Folder>
   <Folder Name="/samples/">
+    <File Path="samples/Directory.Build.props" />
     <Project Path="samples/NetInfoSample/NetInfoSample.csproj" />
   </Folder>
   <Folder Name="/src/">
