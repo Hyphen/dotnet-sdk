@@ -2,6 +2,8 @@
   <Folder Name="/meta/">
     <File Path=".editorconfig" />
     <File Path=".gitignore" />
+    <File Path="build" />
+    <File Path="build.ps1" />
     <File Path="global.json" />
     <File Path="README.md" />
   </Folder>
