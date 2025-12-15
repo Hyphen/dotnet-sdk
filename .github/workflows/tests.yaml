@@ -70,3 +70,26 @@ jobs:
         path: |
           test/Hyphen.Sdk.Tests/bin/Release/net8.0/TestResults/coverage.cobertura.xml
           test/Hyphen.Sdk.Tests/bin/Release/net8.0/TestResults/tests.ctrf
+
+    - name: Build package
+      run: dotnet pack --property Version=0.0.1
+
+    - name: Sign package
+      uses: sslcom/esigner-codesign@develop
+      with:
+        command: sign
+        username: ${{ secrets.ES_USERNAME }}
+        password: ${{ secrets.ES_PASSWORD }}
+        credential_id: ${{ secrets.ES_CREDENTIAL_ID }}
+        totp_secret: ${{ secrets.ES_TOTP_SECRET }}
+        file_path: ${GITHUB_WORKSPACE}/src/Hyphen.Sdk/bin/Release/Hyphen.Sdk.0.0.1.nupkg
+        output_path: ${GITHUB_WORKSPACE}/artifacts
+        malware_block: false
+        environment_name: PROD
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: packages
+        path: artifacts
+        compression-level: 9
