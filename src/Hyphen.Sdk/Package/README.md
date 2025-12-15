@@ -1,4 +1,4 @@
-![Hyphen AI](https://github.com/Hyphen/dotnet-sdk/raw/main/src/Hyphen.Sdk/Package/icon.png)
+![Hyphen AI](https://raw.githubusercontent.com/Hyphen/dotnet-sdk/refs/heads/main/src/Hyphen.Sdk/Package/icon.png)
 
 # Hyphen .NET SDK
 
