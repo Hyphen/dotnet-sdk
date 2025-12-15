@@ -72,10 +72,10 @@ jobs:
           test/Hyphen.Sdk.Tests/bin/Release/net8.0/TestResults/tests.ctrf
 
     - name: Restore
-      name: dotnet restore
+      run: dotnet restore
 
     - name: Build
-      name: dotnet build --configuration Release --property Version=0.0.1
+      run: dotnet build --configuration Release --property Version=0.0.1
 
     - name: Sign .NET Standard 2.0 library
       uses: sslcom/esigner-codesign@develop
