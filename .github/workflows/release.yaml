@@ -80,7 +80,7 @@ jobs:
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
-      if: any()
+      if: always()
       with:
         name: packages
         path: artifacts
