@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Hyphen.Sdk.Internal;
 
 namespace Hyphen.Sdk;
@@ -23,20 +24,24 @@ public abstract class BaseService(IHttpClientFactory httpClientFactory, ILogger 
 	/// <summary>
 	/// Gets the API key used to make service requests.
 	/// </summary>
+	[ExcludeFromCodeCoverage]
 	protected ApiKey ApiKey { get; } = new(Guard.ArgumentNotNull(options).Value.ApiKey);
 
 	/// <summary>
 	/// Gets the HTTP client factory used to make HTTP clients for service requests.
 	/// </summary>
+	[ExcludeFromCodeCoverage]
 	protected IHttpClientFactory HttpClientFactory { get; } = Guard.ArgumentNotNull(httpClientFactory);
 
 	/// <summary>
 	/// Gets a flag indicating whether environment variable <c>HYPHEN_DEV</c> is truthy.
 	/// </summary>
+	[ExcludeFromCodeCoverage]
 	internal static bool IsDevEnvironment => TrueValues.Contains(Environment.GetEnvironmentVariable(HyphenEnv.Dev));
 
 	/// <summary>
 	/// Gets the logger used to log messages.
 	/// </summary>
+	[ExcludeFromCodeCoverage]
 	protected ILogger Logger { get; } = Guard.ArgumentNotNull(logger);
 }

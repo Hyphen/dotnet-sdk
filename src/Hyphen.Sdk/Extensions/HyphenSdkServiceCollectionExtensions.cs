@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Hyphen.Sdk;
 using Hyphen.Sdk.Internal;
 
@@ -6,6 +7,7 @@ namespace Microsoft.Extensions.DependencyInjection;
 /// <summary>
 /// Extension methods for the Hyphen SDK.
 /// </summary>
+[ExcludeFromCodeCoverage]
 public static class HyphenSdkServiceCollectionExtensions
 {
 	/// <summary>

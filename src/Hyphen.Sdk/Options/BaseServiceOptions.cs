@@ -1,9 +1,12 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Hyphen.Sdk;
 
 /// <summary>
 /// Represents the options values that can be used to configure any service derived
 /// from <see cref="BaseService"/>.
 /// </summary>
+[ExcludeFromCodeCoverage]
 public class BaseServiceOptions
 {
 	/// <summary>

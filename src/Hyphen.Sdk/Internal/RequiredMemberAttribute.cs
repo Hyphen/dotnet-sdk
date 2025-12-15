@@ -1,16 +1,22 @@
+#if NETSTANDARD
+
 // Compiler polyfill for .NET Framework
 
 #pragma warning disable IDE0130 // Namespace does not match folder structure
+
+using System.Diagnostics.CodeAnalysis;
 
 namespace System.Runtime.CompilerServices
 {
 	/// <summary/>
 	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false, Inherited = false)]
+	[ExcludeFromCodeCoverage]
 	internal sealed class RequiredMemberAttribute : Attribute
 	{ }
 
 	/// <summary/>
 	[AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = false)]
+	[ExcludeFromCodeCoverage]
 	internal sealed class CompilerFeatureRequiredAttribute(string featureName) :
 		Attribute
 	{
@@ -26,6 +32,9 @@ namespace System.Diagnostics.CodeAnalysis
 {
 	/// <summary/>
 	[AttributeUsage(AttributeTargets.Constructor, AllowMultiple = false, Inherited = false)]
+	[ExcludeFromCodeCoverage]
 	internal sealed class SetsRequiredMembersAttribute : Attribute
 	{ }
 }
+
+#endif  // NETSTANDARD

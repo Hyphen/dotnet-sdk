@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Net;
 
@@ -7,6 +8,7 @@ using System.Text;
 
 namespace Hyphen.Sdk.Resources;
 
+[ExcludeFromCodeCoverage]
 internal static class HyphenSdkResourcesExtensions
 {
 #if !NETSTANDARD

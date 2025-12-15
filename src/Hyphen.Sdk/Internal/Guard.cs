@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace Hyphen.Sdk.Internal;
 
+[ExcludeFromCodeCoverage]
 internal static class Guard
 {
 	public static T ArgumentNotNull<T>(

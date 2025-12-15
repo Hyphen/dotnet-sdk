@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Hyphen.Sdk.Internal;
 using Hyphen.Sdk.Resources;
 
@@ -31,18 +32,22 @@ public class ApiKey
 	/// <summary>
 	/// Create an instance of <see cref="ApiKey"/> from a <see cref="string"/>.
 	/// </summary>
+	[ExcludeFromCodeCoverage]
 	public static ApiKey FromString(string apiKey) => new(apiKey);
 
 	/// <inheritdoc/>
+	[ExcludeFromCodeCoverage]
 	public override string ToString() => apiKey;
 
 	/// <summary>
 	/// Converts an <see cref="ApiKey"/> into a <see cref="string"/>.
 	/// </summary>
+	[ExcludeFromCodeCoverage]
 	public static implicit operator string(ApiKey apiKey) => Guard.ArgumentNotNull(apiKey).apiKey;
 
 	/// <summary>
 	/// Converts a <see cref="string"/> into an <see cref="ApiKey"/>.
 	/// </summary>
+	[ExcludeFromCodeCoverage]
 	public static implicit operator ApiKey(string apiKey) => new(apiKey);
 }
