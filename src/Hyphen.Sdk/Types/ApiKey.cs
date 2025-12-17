@@ -18,13 +18,13 @@ public class ApiKey
 	/// variable <c>HYPHEN_API_KEY</c> will be used as the API key.</param>
 	public ApiKey(string? apiKey = null)
 	{
-		apiKey ??= Environment.GetEnvironmentVariable(HyphenEnv.ApiKey);
+		apiKey ??= Environment.GetEnvironmentVariable(Env.ApiKey);
 
 		if (string.IsNullOrWhiteSpace(apiKey))
-			throw new ArgumentException(HyphenSdkResources.ApiKeyRequired, nameof(apiKey));
+			throw new ArgumentException(HyphenSdkResources.ApiKey_Required, nameof(apiKey));
 
 		if (apiKey.StartsWith("public_", StringComparison.OrdinalIgnoreCase))
-			throw new ArgumentException(HyphenSdkResources.ApiKeyShouldNotBePublic, nameof(apiKey));
+			throw new ArgumentException(HyphenSdkResources.ApiKey_ShouldNotBePublic, nameof(apiKey));
 
 		this.apiKey = apiKey;
 	}

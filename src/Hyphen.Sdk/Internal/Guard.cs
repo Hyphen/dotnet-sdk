@@ -6,9 +6,13 @@ namespace Hyphen.Sdk.Internal;
 [ExcludeFromCodeCoverage]
 internal static class Guard
 {
-	public static T ArgumentNotNull<T>(
-		[NotNull] T? argValue,
-		[CallerArgumentExpression(nameof(argValue))] string? argName = null)
-			where T : class =>
-				argValue ?? throw new ArgumentNullException(argName?.TrimStart('@'));
+	public static T ArgumentNotNull<T>([NotNull] T? argValue, [CallerArgumentExpression(nameof(argValue))] string? argName = null)
+		where T : class =>
+			argValue ?? throw new ArgumentNullException(argName?.TrimStart('@'));
+
+	public static void True(bool test, string failureMessage)
+	{
+		if (!test)
+			throw new InvalidOperationException(failureMessage);
+	}
 }

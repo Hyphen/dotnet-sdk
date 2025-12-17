@@ -1,7 +1,8 @@
 * text=auto eol=lf
 
 *.cs text diff=csharp
+*.Designer.cs text eol=crlf
 *.csproj text merge=union
 *.ico binary
-*.resx text merge=union
-*.slnx eol=crlf
+*.resx text eol=crlf merge=union
+*.slnx text eol=crlf merge=union

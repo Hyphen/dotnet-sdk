@@ -5,11 +5,11 @@ using Hyphen.Sdk.Resources;
 namespace Hyphen.Sdk;
 
 internal class NetInfo(IHttpClientFactory httpClientFactory, ILogger<INetInfo> logger, IOptions<NetInfoOptions> options)
-	: BaseService(httpClientFactory, logger, options), INetInfo
+	: BaseHttpService(httpClientFactory, logger, options), INetInfo
 {
 	internal Uri BaseUri { get; } =
 		Guard.ArgumentNotNull(options).Value.BaseUri
-			?? (IsDevEnvironment ? new("https://dev.net.info") : new("https://net.info"));
+			?? (Env.IsDevEnvironment ? new("https://dev.net.info") : new("https://net.info"));
 
 	public ValueTask<NetInfoResult[]> GetIPInfos(string[] ips, CancellationToken cancellationToken)
 	{
@@ -45,7 +45,7 @@ internal class NetInfo(IHttpClientFactory httpClientFactory, ILogger<INetInfo> l
 		{
 			var response = await requestThunk().ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
-				return WithError(ips, HyphenSdkResources.HttpStatusCodeError(response.StatusCode));
+				return WithError(ips, HyphenSdkResources.Http_StatusCodeError(response.StatusCode));
 
 #if NETSTANDARD
 			var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
@@ -55,7 +55,7 @@ internal class NetInfo(IHttpClientFactory httpClientFactory, ILogger<INetInfo> l
 
 			var body = await JsonSerializer.DeserializeAsync<T>(stream, cancellationToken: cancellationToken).ConfigureAwait(false);
 			if (body is null)
-				return WithError(ips, HyphenSdkResources.ResponseMalformed);
+				return WithError(ips, HyphenSdkResources.Http_ResponseMalformed);
 
 			var result = contentProcessor(body);
 
@@ -65,14 +65,14 @@ internal class NetInfo(IHttpClientFactory httpClientFactory, ILogger<INetInfo> l
 					{
 						IP = idx >= ips.Length ? "unknown" : ips[idx],
 						Type = IPType.Error,
-						ErrorMessage = HyphenSdkResources.ResponseMalformed
+						ErrorMessage = HyphenSdkResources.Http_ResponseMalformed
 					};
 
 			return result;
 		}
 		catch (JsonException)
 		{
-			return WithError(ips, HyphenSdkResources.ResponseMalformed);
+			return WithError(ips, HyphenSdkResources.Http_ResponseMalformed);
 		}
 		catch (Exception ex)
 		{

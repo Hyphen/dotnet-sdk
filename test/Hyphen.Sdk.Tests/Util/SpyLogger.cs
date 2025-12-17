@@ -14,8 +14,13 @@ internal class SpyLogger<T> : ILogger<T>
 
 	public bool IsEnabled(LogLevel logLevel) => true;
 
-	public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter) =>
-		Messages.Add($"[{logLevel}::{eventId}] {formatter(state, exception)}");
+	public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
+	{
+		if (eventId != default)
+			Messages.Add($"[{logLevel}::{eventId}] {formatter(state, exception)}");
+		else
+			Messages.Add($"[{logLevel}] {formatter(state, exception)}");
+	}
 
 	class ScopeDisposalLogger<TState>(List<string> messages, TState state) : IDisposable
 		where TState : notnull

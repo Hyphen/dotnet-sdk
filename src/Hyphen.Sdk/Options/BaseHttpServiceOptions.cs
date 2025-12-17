@@ -4,10 +4,10 @@ namespace Hyphen.Sdk;
 
 /// <summary>
 /// Represents the options values that can be used to configure any service derived
-/// from <see cref="BaseService"/>.
+/// from <see cref="BaseHttpService"/>.
 /// </summary>
 [ExcludeFromCodeCoverage]
-public class BaseServiceOptions
+public class BaseHttpServiceOptions
 {
 	/// <summary>
 	/// Gets or sets the API key used to issue requests.

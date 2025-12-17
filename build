@@ -11,7 +11,7 @@ builtin type -P dotnet &>/dev/null || write_error "Could not find 'dotnet'; plea
 dotnet tool restore
 dotnet restore
 dotnet build --no-restore --configuration Release
-dotnet test --no-build --configuration Release --coverage --coverage-output-format cobertura --coverage-output coverage.cobertura.xml
+dotnet test --no-build --configuration Release --coverage --coverage-output-format cobertura --coverage-output coverage.cobertura.xml --coverage-settings .runsettings
 dotnet reportgenerator -reports:**/TestResults/**/coverage.cobertura.xml -targetdir:CoverageReport -reporttypes:"TextSummary" -verbosity:off
 echo ""
 echo -e "\e[32mCode coverage report:\e[0m"

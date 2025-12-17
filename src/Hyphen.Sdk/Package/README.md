@@ -1,14 +1,10 @@
-![Hyphen AI](https://raw.githubusercontent.com/Hyphen/dotnet-sdk/refs/heads/main/src/Hyphen.Sdk/Package/icon.png)
+![Hyphen AI](https://raw.githubusercontent.com/Hyphen/hyphen-design-tokens/refs/heads/main/assets/images/hyphen-symbol-rgb.svg)
 
 # Hyphen .NET SDK
 
 The Hyphen .NET SDK is a .NET library that allows developers to easily integrate Hyphen features into their application, including:
 
-<!--
-- [Feature Flag Service](https://hyphen.ai/toggle) ("Toggle")
 - [Secret Management Service](https://hyphen.ai/env) ("ENV")
-- [Short Code Service](https://hyphen.ai/link) ("Link")
--->
 - [Geo Information Service](https://hyphen.ai/net-info) ("net-info")
 
 The library is compatible with .NET Standard 2.0 and .NET 8.

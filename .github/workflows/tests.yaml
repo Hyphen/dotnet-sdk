@@ -36,7 +36,7 @@ jobs:
       run: dotnet build --no-restore --configuration Release
 
     - name: Run tests with coverage
-      run: dotnet test --no-build --configuration Release --coverage --coverage-output-format cobertura --coverage-output coverage.cobertura.xml --report-ctrf --report-ctrf-filename tests.ctrf
+      run: dotnet test --no-build --configuration Release --coverage --coverage-output-format cobertura --coverage-output coverage.cobertura.xml --coverage-settings .runsettings --report-ctrf --report-ctrf-filename tests.ctrf
 
     - name: Generate coverage report
       uses: irongut/CodeCoverageSummary@v1.3.0

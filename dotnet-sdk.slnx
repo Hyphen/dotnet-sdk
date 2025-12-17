@@ -2,6 +2,7 @@
   <Folder Name="/meta/">
     <File Path=".editorconfig" />
     <File Path=".gitignore" />
+    <File Path=".runsettings" />
     <File Path="build" />
     <File Path="build.ps1" />
     <File Path="global.json" />

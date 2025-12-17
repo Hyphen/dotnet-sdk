@@ -5,11 +5,25 @@ using Hyphen.Sdk.Internal;
 namespace Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
-/// Extension methods for the Hyphen SDK.
+/// Hyphen SDK extensions for <see cref="IServiceCollection"/>.
 /// </summary>
 [ExcludeFromCodeCoverage]
 public static class HyphenSdkServiceCollectionExtensions
 {
+	/// <summary>
+	/// Adds the <see cref="IEnv"/> service to the <see cref="IServiceCollection"/>.
+	/// </summary>
+	/// <param name="services" />
+	/// <returns>The <see cref="IServiceCollection"/>.</returns>
+	public static IServiceCollection AddHyphenEnv(this IServiceCollection services)
+	{
+		Guard.ArgumentNotNull(services)
+			.RegisterDependencies()
+			.TryAddSingleton<IEnv, Env>();
+
+		return services;
+	}
+
 	/// <summary>
 	/// Adds the <see cref="INetInfo"/> service to the <see cref="IServiceCollection"/>.
 	/// </summary>

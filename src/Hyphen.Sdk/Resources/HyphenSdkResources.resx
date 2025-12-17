@@ -117,19 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ApiKeyRequired" xml:space="preserve">
+  <data name="ApiKey_Required" xml:space="preserve">
     <value>API key is required. Please provide it via options or set the HYPHEN_API_KEY environment variable.</value>
   </data>
-  <data name="HttpStatusCodeErrorFmt" xml:space="preserve">
-    <value>Received HTTP response code {0} ({1})</value>
+  <data name="Http_StatusCodeErrorFmt" xml:space="preserve">
+    <value>Received HTTP response code {0} ({1}).</value>
   </data>
-  <data name="InvalidIPArray" xml:space="preserve">
-    <value>The provided IPs array is invalid. It should be a non-empty array of strings.</value>
-  </data>
-  <data name="ApiKeyShouldNotBePublic" xml:space="preserve">
+  <data name="ApiKey_ShouldNotBePublic" xml:space="preserve">
     <value>The provided API key is a public API key. Please provide a valid non public API key for authentication.</value>
   </data>
-  <data name="ResponseMalformed" xml:space="preserve">
+  <data name="Http_ResponseMalformed" xml:space="preserve">
     <value>The HTTP response appears to be malformed and could not be deserialized.</value>
+  </data>
+  <data name="Env_InvalidValueFmt" xml:space="preserve">
+    <value>Environment variable "{0}" has an invalid value ({1}).</value>
+  </data>
+  <data name="Env_UnterminatedMultiLineValueFmt" xml:space="preserve">
+    <value>While parsing "{0}", value "{1}" has an unterminated multi-line value.</value>
+  </data>
+  <data name="Env_InvalidValueTypeFmt" xml:space="preserve">
+    <value>Environment variable "{0}" has an invalid {1} value ({2}).</value>
+  </data>
+  <data name="Env_InvalidLineFmt" xml:space="preserve">
+    <value>While parsing "{0}", line "{1}" was not valid.</value>
   </data>
 </root>
