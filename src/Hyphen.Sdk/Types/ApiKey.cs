@@ -21,10 +21,10 @@ public class ApiKey
 		apiKey ??= Environment.GetEnvironmentVariable(Env.ApiKey);
 
 		if (string.IsNullOrWhiteSpace(apiKey))
-			throw new ArgumentException(HyphenSdkResources.ApiKey_Required, nameof(apiKey));
+			throw new ApiKeyException(HyphenSdkResources.ApiKey_Required);
 
 		if (apiKey.StartsWith("public_", StringComparison.OrdinalIgnoreCase))
-			throw new ArgumentException(HyphenSdkResources.ApiKey_ShouldNotBePublic, nameof(apiKey));
+			throw new ApiKeyException(HyphenSdkResources.ApiKey_ShouldNotBePublic);
 
 		this.apiKey = apiKey;
 	}
