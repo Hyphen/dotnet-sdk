@@ -4,7 +4,7 @@ using Hyphen.Sdk.Internal;
 namespace Hyphen.Sdk;
 
 /// <summary>
-/// Extension methods for <see cref="INetInfo"/>.
+/// Hyphen SDK extensions for <see cref="INetInfo"/>.
 /// </summary>
 [ExcludeFromCodeCoverage]
 public static class HyphenSdkNetInfoExtensions

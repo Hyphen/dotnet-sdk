@@ -3,10 +3,10 @@ using System.Diagnostics.CodeAnalysis;
 namespace Hyphen.Sdk;
 
 /// <summary>
-/// Represents the options values that can be used to configure <see cref="NetInfo"/>.
+/// Represents the options values that can be used to configure <see cref="HyphenSdkServiceCollectionExtensions.AddNetInfo"/>.
 /// </summary>
 [ExcludeFromCodeCoverage]
-public class NetInfoOptions : BaseServiceOptions
+public class NetInfoOptions : BaseHttpServiceOptions
 {
 	/// <summary>
 	/// Gets or sets the base URL for the request.

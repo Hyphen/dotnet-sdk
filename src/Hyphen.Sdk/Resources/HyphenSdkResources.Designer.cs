@@ -63,45 +63,72 @@ namespace Hyphen.Sdk.Resources {
         /// <summary>
         ///   Looks up a localized string similar to API key is required. Please provide it via options or set the HYPHEN_API_KEY environment variable..
         /// </summary>
-        internal static string ApiKeyRequired {
+        internal static string ApiKey_Required {
             get {
-                return ResourceManager.GetString("ApiKeyRequired", resourceCulture);
+                return ResourceManager.GetString("ApiKey_Required", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The provided API key is a public API key. Please provide a valid non public API key for authentication..
         /// </summary>
-        internal static string ApiKeyShouldNotBePublic {
+        internal static string ApiKey_ShouldNotBePublic {
             get {
-                return ResourceManager.GetString("ApiKeyShouldNotBePublic", resourceCulture);
+                return ResourceManager.GetString("ApiKey_ShouldNotBePublic", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Received HTTP response code {0} ({1}).
+        ///   Looks up a localized string similar to While parsing &quot;{0}&quot;, line &quot;{1}&quot; was not valid..
         /// </summary>
-        internal static string HttpStatusCodeErrorFmt {
+        internal static string Env_InvalidLineFmt {
             get {
-                return ResourceManager.GetString("HttpStatusCodeErrorFmt", resourceCulture);
+                return ResourceManager.GetString("Env_InvalidLineFmt", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The provided IPs array is invalid. It should be a non-empty array of strings..
+        ///   Looks up a localized string similar to Environment variable &quot;{0}&quot; has an invalid value ({1})..
         /// </summary>
-        internal static string InvalidIPArray {
+        internal static string Env_InvalidValueFmt {
             get {
-                return ResourceManager.GetString("InvalidIPArray", resourceCulture);
+                return ResourceManager.GetString("Env_InvalidValueFmt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Environment variable &quot;{0}&quot; has an invalid {1} value ({2})..
+        /// </summary>
+        internal static string Env_InvalidValueTypeFmt {
+            get {
+                return ResourceManager.GetString("Env_InvalidValueTypeFmt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to While parsing &quot;{0}&quot;, value &quot;{1}&quot; has an unterminated multi-line value..
+        /// </summary>
+        internal static string Env_UnterminatedMultiLineValueFmt {
+            get {
+                return ResourceManager.GetString("Env_UnterminatedMultiLineValueFmt", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The HTTP response appears to be malformed and could not be deserialized..
         /// </summary>
-        internal static string ResponseMalformed {
+        internal static string Http_ResponseMalformed {
             get {
-                return ResourceManager.GetString("ResponseMalformed", resourceCulture);
+                return ResourceManager.GetString("Http_ResponseMalformed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Received HTTP response code {0} ({1})..
+        /// </summary>
+        internal static string Http_StatusCodeErrorFmt {
+            get {
+                return ResourceManager.GetString("Http_StatusCodeErrorFmt", resourceCulture);
             }
         }
     }

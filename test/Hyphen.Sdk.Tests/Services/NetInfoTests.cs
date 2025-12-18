@@ -4,7 +4,7 @@ using Hyphen.Sdk.Resources;
 
 namespace Hyphen.Sdk;
 
-[CleanEnvironment(HyphenEnv.ApiKey, HyphenEnv.Dev)]
+[CleanEnvironment(Env.ApiKey, Env.Dev)]
 public class NetInfoTests
 {
 	readonly IHttpClientFactory httpClientFactory;
@@ -58,7 +58,7 @@ public class NetInfoTests
 	[InlineData("true", "https://dev.net.info/")]
 	public void UsesDefaultBaseUri(string hyphenDevValue, string expectedUri)
 	{
-		Environment.SetEnvironmentVariable(HyphenEnv.Dev, hyphenDevValue);
+		Environment.SetEnvironmentVariable(Env.Dev, hyphenDevValue);
 
 		var netInfo = new NetInfo(httpClientFactory, logger, Options.Create(options));
 
@@ -98,7 +98,7 @@ public class NetInfoTests
 				{
 					IP = "unknown",
 					Type = IPType.Error,
-					ErrorMessage = HyphenSdkResources.ResponseMalformed,
+					ErrorMessage = HyphenSdkResources.Http_ResponseMalformed,
 					Location = default(Location)
 				}, response, strict: true);
 			}
@@ -120,7 +120,7 @@ public class NetInfoTests
 			{
 				IP = "unknown",
 				Type = IPType.Error,
-				ErrorMessage = HyphenSdkResources.HttpStatusCodeError(HttpStatusCode.NotFound),
+				ErrorMessage = HyphenSdkResources.Http_StatusCodeError(HttpStatusCode.NotFound),
 				Location = default(Location)
 			}, response, strict: true);
 		}
@@ -177,7 +177,7 @@ public class NetInfoTests
 				{
 					IP = "1.2.3.4",
 					Type = IPType.Error,
-					ErrorMessage = HyphenSdkResources.ResponseMalformed,
+					ErrorMessage = HyphenSdkResources.Http_ResponseMalformed,
 					Location = default(Location)
 				}, response, strict: true);
 			}
@@ -200,7 +200,7 @@ public class NetInfoTests
 			{
 				IP = "1.2.3.4",
 				Type = IPType.Error,
-				ErrorMessage = HyphenSdkResources.HttpStatusCodeError(HttpStatusCode.NotFound),
+				ErrorMessage = HyphenSdkResources.Http_StatusCodeError(HttpStatusCode.NotFound),
 				Location = default(Location)
 			}, response, strict: true);
 		}
@@ -261,7 +261,7 @@ public class NetInfoTests
 						{
 							IP = "1.2.3.4",
 							Type = IPType.Error,
-							ErrorMessage = HyphenSdkResources.ResponseMalformed,
+							ErrorMessage = HyphenSdkResources.Http_ResponseMalformed,
 							Location = default(Location)
 						}, item, strict: true),
 					item =>
@@ -269,7 +269,7 @@ public class NetInfoTests
 						{
 							IP = "5.6.7.8",
 							Type = IPType.Error,
-							ErrorMessage = HyphenSdkResources.ResponseMalformed,
+							ErrorMessage = HyphenSdkResources.Http_ResponseMalformed,
 							Location = default(Location)
 						}, item, strict: true)
 				);
@@ -295,7 +295,7 @@ public class NetInfoTests
 					{
 						IP = "1.2.3.4",
 						Type = IPType.Error,
-						ErrorMessage = HyphenSdkResources.ResponseMalformed,
+						ErrorMessage = HyphenSdkResources.Http_ResponseMalformed,
 						Location = default(Location)
 					}, item, strict: true),
 				item =>
@@ -303,7 +303,7 @@ public class NetInfoTests
 					{
 						IP = "5.6.7.8",
 						Type = IPType.Error,
-						ErrorMessage = HyphenSdkResources.ResponseMalformed,
+						ErrorMessage = HyphenSdkResources.Http_ResponseMalformed,
 						Location = default(Location)
 					}, item, strict: true),
 				item =>
@@ -311,7 +311,7 @@ public class NetInfoTests
 					{
 						IP = "unknown",
 						Type = IPType.Error,
-						ErrorMessage = HyphenSdkResources.ResponseMalformed,
+						ErrorMessage = HyphenSdkResources.Http_ResponseMalformed,
 						Location = default(Location)
 					}, item, strict: true)
 			);
@@ -331,7 +331,7 @@ public class NetInfoTests
 					{
 						IP = "1.2.3.4",
 						Type = IPType.Error,
-						ErrorMessage = HyphenSdkResources.HttpStatusCodeError(HttpStatusCode.NotFound),
+						ErrorMessage = HyphenSdkResources.Http_StatusCodeError(HttpStatusCode.NotFound),
 						Location = default(Location)
 					}, item, strict: true),
 				item =>
@@ -339,7 +339,7 @@ public class NetInfoTests
 					{
 						IP = "5.6.7.8",
 						Type = IPType.Error,
-						ErrorMessage = HyphenSdkResources.HttpStatusCodeError(HttpStatusCode.NotFound),
+						ErrorMessage = HyphenSdkResources.Http_StatusCodeError(HttpStatusCode.NotFound),
 						Location = default(Location)
 					}, item, strict: true)
 			);

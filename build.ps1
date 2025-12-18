@@ -11,7 +11,7 @@ if ($null -eq (Get-Command "dotnet" -ErrorAction Ignore)) {
 dotnet tool restore
 dotnet restore
 dotnet build --no-restore --configuration Release
-dotnet test --no-build --configuration Release --coverage --coverage-output-format cobertura --coverage-output coverage.cobertura.xml
+dotnet test --no-build --configuration Release --coverage --coverage-output-format cobertura --coverage-output coverage.cobertura.xml --coverage-settings .runsettings
 dotnet reportgenerator -reports:**/TestResults/**/coverage.cobertura.xml -targetdir:CoverageReport -reporttypes:"TextSummary" -verbosity:off
 Write-Host ""
 Write-Host "Code coverage report:" -ForegroundColor DarkGreen

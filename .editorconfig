@@ -8,14 +8,16 @@ insert_final_newline = true
 indent_style = tab
 
 # Visual Studio demands 2-spaced project files
-[*.{csproj,props,targets,yaml}]
+[*.{csproj,md,props,slnx,targets,yaml}]
 indent_style = space
 indent_size = 2
 
-[*.slnx]
+[*.{Designer.cs,resx,slnx}]
 end_of_line = crlf
 
 [*.cs]
 # Analyzer severity
 dotnet_diagnostic.CA1031.severity  = none  # Do not catch general exception types
-dotnet_diagnostic.IDE0130.severity = none  # We use folders for organization, not to indicate namespaces
+dotnet_diagnostic.CA1848.severity  = none  # Use the LoggerMessage delegates
+dotnet_diagnostic.CA2254.severity  = none  # Template should be a static expression
+dotnet_diagnostic.IDE0130.severity = none  # Namespace does not match folder structure

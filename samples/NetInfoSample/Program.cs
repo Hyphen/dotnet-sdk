@@ -15,11 +15,17 @@ builder.Services.AddNetInfo();
 builder.Services.Configure<NetInfoOptions>(builder.Configuration.GetSection("NetInfo"));
 
 // Config option 2: Configure via code
-builder.Services.Configure<NetInfoOptions>(options =>
-{
-	// Uncomment the line below and put in your API key if you aren't using the HYPHEN_API_KEY environment variable
-	//options.ApiKey = "";
-});
+//builder.Services.Configure<NetInfoOptions>(options =>
+//{
+//	options.ApiKey = "";
+//});
+
+// Config option 3: Configure via code using Env
+//builder.Services.AddHyphenEnv();
+//builder.Services.AddOptions<NetInfoOptions>().Configure<IEnv>((options, env) =>
+//{
+//	options.ApiKey = env.GetString("MY_API_KEY", required: true);
+//});
 
 using var host = builder.Build();
 
