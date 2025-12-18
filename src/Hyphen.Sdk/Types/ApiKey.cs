@@ -30,6 +30,12 @@ public class ApiKey
 	}
 
 	/// <summary>
+	/// Gets the API key value.
+	/// </summary>
+	[ExcludeFromCodeCoverage]
+	public string Value => apiKey;
+
+	/// <summary>
 	/// Create an instance of <see cref="ApiKey"/> from a <see cref="string"/>.
 	/// </summary>
 	[ExcludeFromCodeCoverage]
