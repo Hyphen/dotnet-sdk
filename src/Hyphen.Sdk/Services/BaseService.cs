@@ -11,7 +11,5 @@ public abstract class BaseService(ILogger logger)
 	/// <summary>
 	/// Gets the logger used to log messages.
 	/// </summary>
-#pragma warning disable CA1051 // This is instance-visible so it can be used for code-generated logging extensions
-	protected readonly ILogger Logger = Guard.ArgumentNotNull(logger);
-#pragma warning restore CA1051
+	protected ILogger Logger { get; } = Guard.ArgumentNotNull(logger);
 }
