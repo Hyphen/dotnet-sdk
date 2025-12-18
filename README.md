@@ -179,7 +179,7 @@ Method       | Description
 `GetLong`    | Gets a `long` environment variable
 `GetString`  | Gets a `string` environment variable
 
-All functions have overloads with a `required` parameter, which can change them from returning `null` for missing/invalid values to throwing `ArgumentException` instesad. The numeric functions also include overloads that allow passing `NumberStyles` and `IFormatProvider` to influence the parsing of the numbers.
+All functions have overloads with a `required` parameter, which can change them from returning `null` for missing/invalid values to throwing `ArgumentException` instead. The numeric functions also include overloads that allow passing `NumberStyles` and `IFormatProvider` to influence the parsing of the numbers.
 
 _Note that the `Get` functions on `IEnv` can be used to access any environment variable, not just the ones loaded from your `.env` files._
 
