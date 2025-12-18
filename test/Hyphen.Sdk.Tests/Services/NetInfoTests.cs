@@ -37,12 +37,12 @@ public class NetInfoTests
 		Assert.Throws<ArgumentNullException>("options", () => new NetInfo(httpClientFactory, logger, null!));
 
 		options.ApiKey = null;
-		var argEx = Assert.Throws<ArgumentException>("apiKey", () => new NetInfo(httpClientFactory, logger, Options.Create(options)));
-		Assert.StartsWith("API key is required. Please provide it via options or set the HYPHEN_API_KEY environment variable.", argEx.Message);
+		var argEx = Assert.Throws<ApiKeyException>(() => new NetInfo(httpClientFactory, logger, Options.Create(options)));
+		Assert.Equal("API key is required. Please provide it via options or set the HYPHEN_API_KEY environment variable.", argEx.Message);
 
 		options.ApiKey = "public_abc123";
-		argEx = Assert.Throws<ArgumentException>("apiKey", () => new NetInfo(httpClientFactory, logger, Options.Create(options)));
-		Assert.StartsWith("The provided API key is a public API key. Please provide a valid non public API key for authentication.", argEx.Message);
+		argEx = Assert.Throws<ApiKeyException>(() => new NetInfo(httpClientFactory, logger, Options.Create(options)));
+		Assert.Equal("The provided API key is a public API key. Please provide a valid non public API key for authentication.", argEx.Message);
 	}
 
 	[Fact]
