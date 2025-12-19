@@ -39,7 +39,7 @@ public class ApiKey
 	/// Create an instance of <see cref="ApiKey"/> from a <see cref="string"/>.
 	/// </summary>
 	[ExcludeFromCodeCoverage]
-	public static ApiKey FromString(string apiKey) => new(apiKey);
+	public static ApiKey FromString(string? apiKey) => new(apiKey);
 
 	/// <inheritdoc/>
 	[ExcludeFromCodeCoverage]
@@ -55,5 +55,5 @@ public class ApiKey
 	/// Converts a <see cref="string"/> into an <see cref="ApiKey"/>.
 	/// </summary>
 	[ExcludeFromCodeCoverage]
-	public static implicit operator ApiKey(string apiKey) => new(apiKey);
+	public static implicit operator ApiKey(string? apiKey) => new(apiKey);
 }

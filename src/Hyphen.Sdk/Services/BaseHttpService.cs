@@ -16,7 +16,7 @@ public abstract class BaseHttpService(IHttpClientFactory httpClientFactory, ILog
 	/// Gets the API key used to make service requests.
 	/// </summary>
 	[ExcludeFromCodeCoverage]
-	protected ApiKey ApiKey { get; } = new(Guard.ArgumentNotNull(options).Value.ApiKey);
+	protected ApiKey ApiKey { get; } = Guard.ArgumentNotNull(options).Value.ApiKey;
 
 	/// <summary>
 	/// Gets the HTTP client factory used to make HTTP clients for service requests.
