@@ -38,10 +38,10 @@ public class EnvTests
 		}
 
 		[Fact]
-		public void UsesAppContextBaseDirectoryByDefault()
+		public void UsesAppContextBaseDirectoryByDefault_WithLocal()
 		{
 			var helper = new EnvHelper();
-			var options = new EnvOptions() { ReadFile = helper.ReadFile, SetEnv = helper.SetEnv };
+			var options = new EnvOptions() { ReadFile = helper.ReadFile, SetEnv = helper.SetEnv, Local = true };
 
 			var _ = new Env(logger, Options.Create(options));
 
@@ -50,6 +50,18 @@ public class EnvTests
 				path => Assert.Equal(Path.Combine(AppContext.BaseDirectory, ".env"), path),
 				path => Assert.Equal(Path.Combine(AppContext.BaseDirectory, ".env.local"), path)
 			);
+		}
+
+		[Fact]
+		public void UsesAppContextBaseDirectoryByDefault_WithoutLocal()
+		{
+			var helper = new EnvHelper();
+			var options = new EnvOptions() { ReadFile = helper.ReadFile, SetEnv = helper.SetEnv, Local = false };
+
+			var _ = new Env(logger, Options.Create(options));
+
+			var path = Assert.Single(helper.ReadFileRequests);
+			Assert.Equal(Path.Combine(AppContext.BaseDirectory, ".env"), path);
 		}
 
 		[Fact]

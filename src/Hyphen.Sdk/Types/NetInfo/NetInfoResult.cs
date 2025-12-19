@@ -1,11 +1,8 @@
-using System.Diagnostics.CodeAnalysis;
-
 namespace Hyphen.Sdk;
 
 /// <summary>
 /// Represents the return value from <see cref="INetInfo"/>.
 /// </summary>
-[ExcludeFromCodeCoverage]
 public class NetInfoResult
 {
 	/// <summary>

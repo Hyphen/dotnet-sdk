@@ -7,9 +7,7 @@ namespace Hyphen.Sdk;
 internal class NetInfo(IHttpClientFactory httpClientFactory, ILogger<INetInfo> logger, IOptions<NetInfoOptions> options)
 	: BaseHttpService(httpClientFactory, logger, options), INetInfo
 {
-	internal Uri BaseUri { get; } =
-		Guard.ArgumentNotNull(options).Value.BaseUri
-			?? (Env.IsDevEnvironment ? new("https://dev.net.info") : new("https://net.info"));
+	internal Uri BaseUri { get; } = GetBaseUri(Guard.ArgumentNotNull(options).Value.BaseUri?.ToString());
 
 	public Task<NetInfoResult[]> GetIPInfos(string[] ips, CancellationToken cancellationToken)
 	{
@@ -33,6 +31,18 @@ internal class NetInfo(IHttpClientFactory httpClientFactory, ILogger<INetInfo> l
 				content => content.Data,
 				cancellationToken
 			);
+	}
+
+	// Helpers
+
+	static Uri GetBaseUri(string? baseUri)
+	{
+		baseUri ??=
+			Env.IsDevEnvironment
+				? "https://dev.net.info"
+				: "https://net.info";
+
+		return new(baseUri.TrimEnd('/') + '/');
 	}
 
 	async static Task<NetInfoResult[]> ProcessResponse<T>(

@@ -76,7 +76,6 @@ internal partial class Env : BaseService, IEnv
 	/// <summary>
 	/// Gets a flag indicating whether environment variable <c>HYPHEN_DEV</c> is truthy.
 	/// </summary>
-	[ExcludeFromCodeCoverage]
 	internal static bool IsDevEnvironment => TrueValues.Contains(Environment.GetEnvironmentVariable(Dev));
 
 	public bool? GetBool(string name, [NotNullWhen(true)] bool required) =>
