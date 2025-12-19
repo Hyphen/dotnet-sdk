@@ -227,7 +227,7 @@ public class NetInfoTests
 		{
 			var netInfo = new NetInfo(httpClientFactory, logger, Options.Create(options));
 
-			await Assert.ThrowsAsync<ArgumentNullException>("ips", () => netInfo.GetIPInfos(null!, TestContext.Current.CancellationToken).AsTask());
+			await Assert.ThrowsAsync<ArgumentNullException>("ips", () => netInfo.GetIPInfos(null!, TestContext.Current.CancellationToken));
 		}
 
 		[Fact]
