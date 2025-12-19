@@ -29,40 +29,37 @@ public class NetInfoTests
 		};
 	}
 
-	[Fact]
-	public void CtorGuardClauses()
+	public class Constructor : NetInfoTests
 	{
-		Assert.Throws<ArgumentNullException>("httpClientFactory", () => new NetInfo(null!, logger, Options.Create(options)));
-		Assert.Throws<ArgumentNullException>("logger", () => new NetInfo(httpClientFactory, null!, Options.Create(options)));
-		Assert.Throws<ArgumentNullException>("options", () => new NetInfo(httpClientFactory, logger, null!));
+		[Fact]
+		public void GuardClauses()
+		{
+			Assert.Throws<ArgumentNullException>("httpClientFactory", () => new NetInfo(null!, logger, Options.Create(options)));
+			Assert.Throws<ArgumentNullException>("logger", () => new NetInfo(httpClientFactory, null!, Options.Create(options)));
+			Assert.Throws<ArgumentNullException>("options", () => new NetInfo(httpClientFactory, logger, null!));
 
-		options.ApiKey = null;
-		var argEx = Assert.Throws<ApiKeyException>(() => new NetInfo(httpClientFactory, logger, Options.Create(options)));
-		Assert.Equal("API key is required. Please provide it via options or set the HYPHEN_API_KEY environment variable.", argEx.Message);
+			options.ApiKey = null;
 
-		options.ApiKey = "public_abc123";
-		argEx = Assert.Throws<ApiKeyException>(() => new NetInfo(httpClientFactory, logger, Options.Create(options)));
-		Assert.Equal("The provided API key is a public API key. Please provide a valid non public API key for authentication.", argEx.Message);
-	}
+			var ex1 = Assert.Throws<ApiKeyException>(() => new NetInfo(httpClientFactory, logger, Options.Create(options)));
+			Assert.Equal("API key is required. Please provide it via options or set the HYPHEN_API_KEY environment variable.", ex1.Message);
 
-	[Fact]
-	public async ValueTask GuardClauses()
-	{
-		var netInfo = new NetInfo(httpClientFactory, logger, Options.Create(options));
+			options.ApiKey = "public_abc123";
 
-		await Assert.ThrowsAsync<ArgumentNullException>("ips", () => netInfo.GetIPInfos(null!, TestContext.Current.CancellationToken).AsTask());
-	}
+			var ex2 = Assert.Throws<ApiKeyException>(() => new NetInfo(httpClientFactory, logger, Options.Create(options)));
+			Assert.Equal("The provided API key is a public API key. Please provide a valid non public API key for authentication.", ex2.Message);
+		}
 
-	[Theory]
-	[InlineData("false", "https://net.info/")]
-	[InlineData("true", "https://dev.net.info/")]
-	public void UsesDefaultBaseUri(string hyphenDevValue, string expectedUri)
-	{
-		Environment.SetEnvironmentVariable(Env.Dev, hyphenDevValue);
+		[Theory]
+		[InlineData("false", "https://net.info/")]
+		[InlineData("true", "https://dev.net.info/")]
+		public void UsesDefaultBaseUri(string hyphenDevValue, string expectedUri)
+		{
+			Environment.SetEnvironmentVariable(Env.Dev, hyphenDevValue);
 
-		var netInfo = new NetInfo(httpClientFactory, logger, Options.Create(options));
+			var netInfo = new NetInfo(httpClientFactory, logger, Options.Create(options));
 
-		Assert.Equal(expectedUri, netInfo.BaseUri.ToString());
+			Assert.Equal(expectedUri, netInfo.BaseUri.ToString());
+		}
 	}
 
 	public class CurrentIP : NetInfoTests
@@ -225,6 +222,14 @@ public class NetInfoTests
 
 	public class MultipleIPs : NetInfoTests
 	{
+		[Fact]
+		public async ValueTask GuardClause()
+		{
+			var netInfo = new NetInfo(httpClientFactory, logger, Options.Create(options));
+
+			await Assert.ThrowsAsync<ArgumentNullException>("ips", () => netInfo.GetIPInfos(null!, TestContext.Current.CancellationToken).AsTask());
+		}
+
 		[Fact]
 		public async ValueTask Returns200()
 		{
