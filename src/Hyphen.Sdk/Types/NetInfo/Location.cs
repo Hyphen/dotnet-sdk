@@ -1,11 +1,8 @@
-using System.Diagnostics.CodeAnalysis;
-
 namespace Hyphen.Sdk;
 
 /// <summary>
 /// Represents a location returned from <see cref="INetInfo"/>.
 /// </summary>
-[ExcludeFromCodeCoverage]
 public class Location
 {
 	/// <summary>

@@ -48,12 +48,10 @@ public class ApiKey
 	/// <summary>
 	/// Converts an <see cref="ApiKey"/> into a <see cref="string"/>.
 	/// </summary>
-	[ExcludeFromCodeCoverage]
 	public static implicit operator string(ApiKey apiKey) => Guard.ArgumentNotNull(apiKey).apiKey;
 
 	/// <summary>
 	/// Converts a <see cref="string"/> into an <see cref="ApiKey"/>.
 	/// </summary>
-	[ExcludeFromCodeCoverage]
 	public static implicit operator ApiKey(string? apiKey) => new(apiKey);
 }

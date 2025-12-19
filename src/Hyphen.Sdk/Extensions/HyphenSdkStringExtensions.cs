@@ -1,8 +1,5 @@
-using System.Diagnostics.CodeAnalysis;
-
 namespace System;
 
-[ExcludeFromCodeCoverage]
 internal static class HyphenSdkStringExtensions
 {
 #if NETSTANDARD

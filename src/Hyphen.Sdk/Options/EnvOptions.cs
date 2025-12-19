@@ -5,7 +5,6 @@ namespace Hyphen.Sdk;
 /// <summary>
 /// Represents the options values that can be used to configure <see cref="HyphenSdkServiceCollectionExtensions.AddHyphenEnv"/>.
 /// </summary>
-[ExcludeFromCodeCoverage]
 public class EnvOptions
 {
 	/// <summary>
@@ -42,7 +41,11 @@ public class EnvOptions
 
 	internal Func<string, string?> GetEnv { get; set; } = System.Environment.GetEnvironmentVariable;
 
-	internal Func<string, string[]?> ReadFile { get; set; } = path => File.Exists(path) ? File.ReadAllLines(path) : null;
+	internal Func<string, string[]?> ReadFile { get; set; } = ReadFileInternal;
 
 	internal Action<string, string?> SetEnv { get; set; } = System.Environment.SetEnvironmentVariable;
+
+	[ExcludeFromCodeCoverage]  // We don't read files from disk in the unit tests
+	static string[]? ReadFileInternal(string path) =>
+		File.Exists(path) ? File.ReadAllLines(path) : null;
 }

@@ -60,6 +60,18 @@ public class NetInfoTests
 
 			Assert.Equal(expectedUri, netInfo.BaseUri.ToString());
 		}
+
+		[Theory]
+		[InlineData("http://localhost:12345/foo")]
+		[InlineData("http://localhost:12345/foo/")]
+		public void NormalizesTrailingSlashOnBaseUri(string baseUri)
+		{
+			options.BaseUri = new(baseUri);
+
+			var netInfo = new NetInfo(httpClientFactory, logger, Options.Create(options));
+
+			Assert.Equal("http://localhost:12345/foo/", netInfo.BaseUri.ToString());
+		}
 	}
 
 	public class CurrentIP : NetInfoTests

@@ -1,4 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
 using Hyphen.Sdk.Internal;
 
 namespace Hyphen.Sdk;
@@ -15,12 +14,10 @@ public abstract class BaseHttpService(IHttpClientFactory httpClientFactory, ILog
 	/// <summary>
 	/// Gets the API key used to make service requests.
 	/// </summary>
-	[ExcludeFromCodeCoverage]
 	protected ApiKey ApiKey { get; } = Guard.ArgumentNotNull(options).Value.ApiKey;
 
 	/// <summary>
 	/// Gets the HTTP client factory used to make HTTP clients for service requests.
 	/// </summary>
-	[ExcludeFromCodeCoverage]
 	protected IHttpClientFactory HttpClientFactory { get; } = Guard.ArgumentNotNull(httpClientFactory);
 }
