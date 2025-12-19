@@ -76,6 +76,7 @@ public class NetInfoTests
 			var request = Assert.Single(messageHandler.Requests);
 			Assert.Equal(HttpMethod.Get, request.Method);
 			Assert.Equal("https://net.info/ip", request.Uri);
+			Assert.Equal("abc123", Assert.Single(request.Headers.GetValues("x-api-key")));
 			Assert.Null(request.Body);
 			Assert.Equivalent(ip, response, strict: true);
 		}
@@ -155,6 +156,7 @@ public class NetInfoTests
 			var request = Assert.Single(messageHandler.Requests);
 			Assert.Equal(HttpMethod.Post, request.Method);
 			Assert.Equal("https://net.info/ip", request.Uri);
+			Assert.Equal("abc123", Assert.Single(request.Headers.GetValues("x-api-key")));
 			Assert.Equal("""["1.2.3.4"]""", request.Body);
 			Assert.Equivalent(ip, response, strict: true);
 		}
@@ -244,6 +246,7 @@ public class NetInfoTests
 			var request = Assert.Single(messageHandler.Requests);
 			Assert.Equal(HttpMethod.Post, request.Method);
 			Assert.Equal("https://net.info/ip", request.Uri);
+			Assert.Equal("abc123", Assert.Single(request.Headers.GetValues("x-api-key")));
 			Assert.Equal("""["1.2.3.4","5.6.7.8"]""", request.Body);
 			Assert.Equivalent(ip1, response[0], strict: true);
 			Assert.Equivalent(ip2, response[1], strict: true);
