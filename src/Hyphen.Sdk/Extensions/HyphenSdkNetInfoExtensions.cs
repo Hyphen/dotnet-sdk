@@ -20,7 +20,7 @@ public static class HyphenSdkNetInfoExtensions
 	/// <remarks>
 	/// This API supports both IPv4 and IPv6 addresses.
 	/// </remarks>
-	public static async ValueTask<NetInfoResult> GetIPInfo(this INetInfo netInfo) =>
+	public static async Task<NetInfoResult> GetIPInfo(this INetInfo netInfo) =>
 		(await Guard.ArgumentNotNull(netInfo).GetIPInfos([], default).ConfigureAwait(false))[0];
 
 	/// <summary>
@@ -35,7 +35,7 @@ public static class HyphenSdkNetInfoExtensions
 	/// <remarks>
 	/// This API supports both IPv4 and IPv6 addresses.
 	/// </remarks>
-	public static async ValueTask<NetInfoResult> GetIPInfo(this INetInfo netInfo, CancellationToken cancellationToken) =>
+	public static async Task<NetInfoResult> GetIPInfo(this INetInfo netInfo, CancellationToken cancellationToken) =>
 		(await Guard.ArgumentNotNull(netInfo).GetIPInfos([], cancellationToken).ConfigureAwait(false))[0];
 
 	/// <summary>
@@ -50,7 +50,7 @@ public static class HyphenSdkNetInfoExtensions
 	/// <remarks>
 	/// This API supports both IPv4 and IPv6 addresses.
 	/// </remarks>
-	public static async ValueTask<NetInfoResult> GetIPInfo(this INetInfo netInfo, string ip) =>
+	public static async Task<NetInfoResult> GetIPInfo(this INetInfo netInfo, string ip) =>
 		(await Guard.ArgumentNotNull(netInfo).GetIPInfos([ip], default).ConfigureAwait(false))[0];
 
 	/// <summary>
@@ -66,7 +66,7 @@ public static class HyphenSdkNetInfoExtensions
 	/// <remarks>
 	/// This API supports both IPv4 and IPv6 addresses.
 	/// </remarks>
-	public static async ValueTask<NetInfoResult> GetIPInfo(this INetInfo netInfo, string ip, CancellationToken cancellationToken) =>
+	public static async Task<NetInfoResult> GetIPInfo(this INetInfo netInfo, string ip, CancellationToken cancellationToken) =>
 		(await Guard.ArgumentNotNull(netInfo).GetIPInfos([ip], cancellationToken).ConfigureAwait(false))[0];
 
 	/// <summary>
@@ -81,6 +81,6 @@ public static class HyphenSdkNetInfoExtensions
 	/// <remarks>
 	/// This API supports both IPv4 and IPv6 addresses.
 	/// </remarks>
-	public static ValueTask<NetInfoResult[]> GetIPInfos(this INetInfo netInfo, params string[] ips) =>
+	public static Task<NetInfoResult[]> GetIPInfos(this INetInfo netInfo, params string[] ips) =>
 		Guard.ArgumentNotNull(netInfo).GetIPInfos(ips, default);
 }

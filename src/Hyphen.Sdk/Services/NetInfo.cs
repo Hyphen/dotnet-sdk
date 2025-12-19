@@ -11,7 +11,7 @@ internal class NetInfo(IHttpClientFactory httpClientFactory, ILogger<INetInfo> l
 		Guard.ArgumentNotNull(options).Value.BaseUri
 			?? (Env.IsDevEnvironment ? new("https://dev.net.info") : new("https://net.info"));
 
-	public ValueTask<NetInfoResult[]> GetIPInfos(string[] ips, CancellationToken cancellationToken)
+	public Task<NetInfoResult[]> GetIPInfos(string[] ips, CancellationToken cancellationToken)
 	{
 		Guard.ArgumentNotNull(ips);
 
@@ -35,7 +35,7 @@ internal class NetInfo(IHttpClientFactory httpClientFactory, ILogger<INetInfo> l
 			);
 	}
 
-	async static ValueTask<NetInfoResult[]> ProcessResponse<T>(
+	async static Task<NetInfoResult[]> ProcessResponse<T>(
 		string[] ips,
 		Func<Task<HttpResponseMessage>> requestThunk,
 		Func<T, NetInfoResult[]> contentProcessor,

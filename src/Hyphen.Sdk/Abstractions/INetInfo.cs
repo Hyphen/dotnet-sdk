@@ -17,5 +17,5 @@ public interface INetInfo
 	/// <remarks>
 	/// This API supports both IPv4 and IPv6 addresses.
 	/// </remarks>
-	ValueTask<NetInfoResult[]> GetIPInfos(string[] ips, CancellationToken cancellationToken);
+	Task<NetInfoResult[]> GetIPInfos(string[] ips, CancellationToken cancellationToken);
 }
