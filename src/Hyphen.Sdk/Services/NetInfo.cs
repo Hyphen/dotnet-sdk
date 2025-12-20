@@ -1,5 +1,4 @@
 using System.Net.Http.Json;
-using Hyphen.Sdk.Internal;
 using Hyphen.Sdk.Resources;
 
 namespace Hyphen.Sdk;

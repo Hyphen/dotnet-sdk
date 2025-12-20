@@ -1,5 +1,3 @@
-using Hyphen.Sdk.Internal;
-
 namespace Hyphen.Sdk;
 
 /// <summary>

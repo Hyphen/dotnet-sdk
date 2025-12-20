@@ -10,6 +10,7 @@
 The Hyphen .NET SDK is a .NET library that allows developers to easily integrate Hyphen features into their application, including:
 
 - [Secret Management Service](https://hyphen.ai/env) ("ENV")
+- [Short Code Service](https://hyphen.ai/link) ("Link")
 - [Geo Information Service](https://hyphen.ai/net-info) ("net-info")
 
 The library is compatible with .NET Standard 2.0 and .NET 8.
@@ -23,6 +24,10 @@ The library is compatible with .NET Standard 2.0 and .NET 8.
     - [Adding ENV](#adding-env)
     - [Configuring ENV](#configuring-env)
     - [Using ENV](#using-env)
+  - [Link (Short Code Service)](#link-short-code-service)
+    - [Adding Link](#adding-link)
+    - [Configuring Link](#configuring-link)
+    - [Using Link](#using-link)
   - [net-info (Geo Information Service)](#net-info-geo-information-service)
     - [Adding net-info](#adding-net-info)
     - [Configuring net-info](#configuring-net-info)
@@ -114,6 +119,7 @@ The service instance types (and their configuration options object) include:
 > Service  | Interface  | Options
 > ---------|------------|--------
 > ENV      | `IEnv`     | `EnvOptions`
+> Link     | `ILink`    | `LinkOptions`
 > net-info | `INetInfo` | `NetInfoOptions`
 
 For more information on these patterns, see the Microsoft documentation:
@@ -182,6 +188,95 @@ Method       | Description
 All functions have overloads with a `required` parameter, which can change them from returning `null` for missing/invalid values to throwing `ArgumentException` instead. The numeric functions also include overloads that allow passing `NumberStyles` and `IFormatProvider` to influence the parsing of the numbers.
 
 _Note that the `Get` functions on `IEnv` can be used to access any environment variable, not just the ones loaded from your `.env` files._
+
+## Link (Short Code Service)
+
+### Adding Link
+
+The Hyphen .NET SDK provides an `ILink` service interface which allows you to manage short code links and associated QR codes.
+
+Short code links allow you to provide a link from a domain you own to any other URL. Short code links can be more memorable and easier to read aloud than the longer, deeper links that they send the user to. These links are typically used in marketing materials and promotions.
+
+QR codes allow you to create a QR code that can be scanned which will send the user to your short code link. They can embed a logo in their center for customization.
+
+You can read more about Link:
+
+* [Website](https://hyphen.ai/link)
+* [Creating short links](https://docs.hyphen.ai/docs/create-short-link)
+* [Creating QR codes](https://docs.hyphen.ai/docs/create-a-qr-code)
+
+### Configuring Link
+
+The `LinkOptions` class has the following properties that can be used to configure Link:
+
+Property          | Description
+------------------|------------
+`ApiKey`          | Sets the API used to talk to Link (defaults to the value in environment variable `HYPHEN_API_KEY` if not set).
+`BaseUriTemplate` | Sets the URI template of the Link service (defaults to `https://api.hyphen.ai/api/organizations/{organizationId}/link/codes/`). When constructing the base URI, the service replaces the text `{organizationId}` with your organization ID.
+`OrganizationId`  | Sets the organization ID used to perform Link operations (defaults to the value in environment variable `HYPHEN_ORGANIZATION_ID` if not set).
+
+### Using Link
+
+The APIs for link are grouped into two categories: APIs which manage short code links, and APIs which manage QR codes.
+
+#### Short Code Link APIs
+
+The `ILink` interface contains the following APIs related to short code links:
+
+Method              | Description
+--------------------|------------
+`CreateShortCode`   | Creates a short code
+`DeleteShortCode`   | Deletes a short code
+`GetShortCode`      | Gets information about a specific short code
+`GetShortCodes`     | Gets a list of short codes that match optional search criteria
+`GetShortCodeStats` | Gets statistics about short code usage
+`GetTags`           | Gets the list of tags used by all short codes in your organization
+`UpdateShortCode`   | Updates a short code
+
+Several APIs return one or more `ShortCodeResult` instances, which include the following properties:
+
+Property       | Description
+---------------|------------
+`Code`         | The "code" portion of the short link (i.e.,`"abc123"` from `https://domain.com/abc123`)
+`Domain`       | The "domain" portion of the short link (i.e., `"domain.com"` from `https://domain.com/abc123`)
+`Id`           | The ID of the short code (in `code_123456789012345678901234` format)
+`LongUrl`      | The URL that the short code sends users to
+`Organization` | The organization that owns the short code
+`Tags`         | The tags associated with the short code
+`Title`        | The title of the short code
+
+The `GetShortCodeStats` API returns a collection of information about usage of your short codes. That includes information about the browsers using the short code, the devices using the short code, the countries where the short code usage took place in, referrers that sent users to the short code, and a daily click count summary for the requested time range.
+
+_Note that the `Get` APIs which may return 404s will return `null` values if the request was for an unknown short code ID or organization ID. The `Create` and `Update` APIs will throw exceptions if the short code ID or organization ID are unknown._
+
+#### QR Code APIs
+
+The `ILink` interface contains the following APIs related to QR codes:
+
+Method         | Description
+---------------|------------
+`CreateQrCode` | Creates a QR code
+`DeleteQrCode` | Deletes a QR code
+`GetQrCode`    | Gets information about a specific QR code
+`GetQrCodes`   | Gets a list of QR codes that match the optional search criteria
+
+Several APIs return one or more `QrCodeResult` instances, which include the following properties:
+
+Property | Description
+---------|------------
+`Id`     | The ID of the QR code (in `lqr_123456789012345678901234` format)
+`Link`   | The link for the short code that the QR code points to
+`QrCode` | The QR code (in `data:image/png;base64,BASE64_ENCODED_IMAGE` format)
+`Title`  | The title of the QR code
+
+The `QrCodeResult` also includes two helper methods to decode the `QrCode` property value:
+
+Method           | Description
+-----------------|------------
+`GetQrCodeBytes` | Get the QR code in `byte[]` format
+`SaveQrCode`     | Save the QR to a file on disk
+
+_Note that QR codes are always provided in PNG format, so when saving them to disk, you should use a `.png` file extension._
 
 ## net-info (Geo Information Service)
 

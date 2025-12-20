@@ -53,5 +53,17 @@ internal static class HyphenSdkResourcesExtensions
 				(int)statusCode,
 				statusCode
 			);
+
+		public static string Http_StatusCodeError(HttpStatusCode statusCode, string message) =>
+			string.Format(
+				CultureInfo.CurrentCulture,
+#if NETSTANDARD
+				HyphenSdkResources.Http_StatusCodeErrorFmt,
+#else
+				http_StatusCodeErrorComposite,
+#endif
+				(int)statusCode,
+				message
+			);
 	}
 }

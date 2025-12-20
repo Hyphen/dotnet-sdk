@@ -5,6 +5,7 @@
 The Hyphen .NET SDK is a .NET library that allows developers to easily integrate Hyphen features into their application, including:
 
 - [Secret Management Service](https://hyphen.ai/env) ("ENV")
+- [Short Code Service](https://hyphen.ai/link) ("Link")
 - [Geo Information Service](https://hyphen.ai/net-info) ("net-info")
 
 The library is compatible with .NET Standard 2.0 and .NET 8.
