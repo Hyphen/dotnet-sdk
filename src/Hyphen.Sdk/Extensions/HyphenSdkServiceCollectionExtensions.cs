@@ -1,6 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
 using Hyphen.Sdk;
-using Hyphen.Sdk.Internal;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -20,6 +19,20 @@ public static class HyphenSdkServiceCollectionExtensions
 		Guard.ArgumentNotNull(services)
 			.RegisterDependencies()
 			.TryAddSingleton<IEnv, Env>();
+
+		return services;
+	}
+
+	/// <summary>
+	/// Adds the <see cref="ILink"/> service to the <see cref="IServiceCollection"/>.
+	/// </summary>
+	/// <param name="services"/>
+	/// <returns>The <see cref="IServiceCollection"/>.</returns>
+	public static IServiceCollection AddLink(this IServiceCollection services)
+	{
+		Guard.ArgumentNotNull(services)
+			.RegisterDependencies()
+			.TryAddSingleton<ILink, Link>();
 
 		return services;
 	}

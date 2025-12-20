@@ -115,6 +115,15 @@ namespace Hyphen.Sdk.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The provided API key is not valid for the request..
+        /// </summary>
+        internal static string Http_InvalidApiKey {
+            get {
+                return ResourceManager.GetString("Http_InvalidApiKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The HTTP response appears to be malformed and could not be deserialized..
         /// </summary>
         internal static string Http_ResponseMalformed {
@@ -124,11 +133,56 @@ namespace Hyphen.Sdk.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Received HTTP response code {0} ({1})..
+        ///   Looks up a localized string similar to Received HTTP response code {0}: {1}.
         /// </summary>
         internal static string Http_StatusCodeErrorFmt {
             get {
                 return ResourceManager.GetString("Http_StatusCodeErrorFmt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to While attempting to create a QR code: Unknown short code ID or organization ID..
+        /// </summary>
+        internal static string Link_CreateQrCode404 {
+            get {
+                return ResourceManager.GetString("Link_CreateQrCode404", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to While attempting to create a short code: Unknown organization ID..
+        /// </summary>
+        internal static string Link_CreateShortCode404 {
+            get {
+                return ResourceManager.GetString("Link_CreateShortCode404", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to While attempting to decode the QrCode value, it was in an unsupported format..
+        /// </summary>
+        internal static string Link_QrCodeInvalidFormat {
+            get {
+                return ResourceManager.GetString("Link_QrCodeInvalidFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to While attempting to update a short code: Unknown short code ID or organization ID..
+        /// </summary>
+        internal static string Link_UpdateShortCode404 {
+            get {
+                return ResourceManager.GetString("Link_UpdateShortCode404", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Organization ID is required. Please provide it via options or set the HYPHEN_ORGANIZATION_ID environment variable..
+        /// </summary>
+        internal static string OrganizationId_Required {
+            get {
+                return ResourceManager.GetString("OrganizationId_Required", resourceCulture);
             }
         }
     }

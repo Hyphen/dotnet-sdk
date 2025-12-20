@@ -121,7 +121,7 @@
     <value>API key is required. Please provide it via options or set the HYPHEN_API_KEY environment variable.</value>
   </data>
   <data name="Http_StatusCodeErrorFmt" xml:space="preserve">
-    <value>Received HTTP response code {0} ({1}).</value>
+    <value>Received HTTP response code {0}: {1}</value>
   </data>
   <data name="ApiKey_ShouldNotBePublic" xml:space="preserve">
     <value>The provided API key is a public API key. Please provide a valid non public API key for authentication.</value>
@@ -140,5 +140,23 @@
   </data>
   <data name="Env_InvalidLineFmt" xml:space="preserve">
     <value>While parsing "{0}", line "{1}" was not valid.</value>
+  </data>
+  <data name="OrganizationId_Required" xml:space="preserve">
+    <value>Organization ID is required. Please provide it via options or set the HYPHEN_ORGANIZATION_ID environment variable.</value>
+  </data>
+  <data name="Http_InvalidApiKey" xml:space="preserve">
+    <value>The provided API key is not valid for the request.</value>
+  </data>
+  <data name="Link_CreateQrCode404" xml:space="preserve">
+    <value>While attempting to create a QR code: Unknown short code ID or organization ID.</value>
+  </data>
+  <data name="Link_CreateShortCode404" xml:space="preserve">
+    <value>While attempting to create a short code: Unknown organization ID.</value>
+  </data>
+  <data name="Link_UpdateShortCode404" xml:space="preserve">
+    <value>While attempting to update a short code: Unknown short code ID or organization ID.</value>
+  </data>
+  <data name="Link_QrCodeInvalidFormat" xml:space="preserve">
+    <value>While attempting to decode the QrCode value, it was in an unsupported format.</value>
   </data>
 </root>

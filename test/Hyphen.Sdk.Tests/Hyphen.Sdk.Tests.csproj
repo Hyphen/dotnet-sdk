@@ -3,6 +3,7 @@
   <PropertyGroup>
     <LangVersion>14</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
+    <NoWarn>$(NoWarn);CA2211</NoWarn>
     <Nullable>enable</Nullable>
     <OutputType>Exe</OutputType>
     <RootNamespace>Hyphen.Sdk.Tests</RootNamespace>

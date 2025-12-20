@@ -16,6 +16,7 @@
   <Folder Name="/samples/">
     <File Path="samples/Directory.Build.props" />
     <Project Path="samples/EnvSample/EnvSample.csproj" />
+    <Project Path="samples/LinkSample/LinkSample.csproj" />
     <Project Path="samples/NetInfoSample/NetInfoSample.csproj" />
   </Folder>
   <Folder Name="/src/">

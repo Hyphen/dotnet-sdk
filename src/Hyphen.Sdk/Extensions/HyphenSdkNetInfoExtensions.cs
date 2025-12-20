@@ -1,5 +1,4 @@
 using System.Diagnostics.CodeAnalysis;
-using Hyphen.Sdk.Internal;
 
 namespace Hyphen.Sdk;
 

@@ -1,6 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using Hyphen.Sdk.Internal;
 
 namespace Hyphen.Sdk;
 

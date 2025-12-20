@@ -1,7 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text.RegularExpressions;
-using Hyphen.Sdk.Internal;
 using Hyphen.Sdk.Resources;
 
 namespace Hyphen.Sdk;
@@ -14,6 +13,7 @@ internal partial class Env : BaseService, IEnv
 	public const string ApiKey = "HYPHEN_API_KEY";
 	public const string AppEnvironment = "HYPHEN_APP_ENVIRONMENT";
 	public const string Dev = "HYPHEN_DEV";
+	public const string OrganizationId = "HYPHEN_ORGANIZATION_ID";
 
 	const string NameRegexPattern =
 		/* lang=regex */ @"^([a-zA-Z_]+[a-zA-Z0-9_]*)\s*=\s*(.*?)$";
