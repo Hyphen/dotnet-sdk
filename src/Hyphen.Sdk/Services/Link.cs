@@ -86,7 +86,7 @@ internal class Link(IHttpClientFactory httpClientFactory, ILogger<ILink> logger,
 	{
 		Guard.ArgumentNotNull(shortCodeId);
 
-		var uri = new Uri(BaseUri, $"{HttpUtility.UrlEncode(shortCodeId)}");
+		var uri = new Uri(BaseUri, HttpUtility.UrlEncode(shortCodeId));
 		var client = HttpClientFactory.CreateClient(nameof(ILink));
 		client.SetHyphenApiKey(ApiKey);
 
