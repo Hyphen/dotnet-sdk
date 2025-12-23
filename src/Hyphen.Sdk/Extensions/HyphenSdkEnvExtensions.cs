@@ -32,8 +32,8 @@ public static class HyphenSdkEnvExtensions
 	/// </summary>
 	/// <param name="env"/>
 	/// <param name="name">The environment variable name</param>
-	/// <param name="required">When <c>true</c> and the variable does not exist (or is in the wrong
-	/// format), will throw; when <c>false</c>, will return <c>null</c> instead.</param>
+	/// <param name="required">When <see langword="true"/> and the variable does not exist (or is in the wrong
+	/// format), will throw; when <see langword="false"/>, will return <see langword="null"/> instead.</param>
 	/// <returns>The value</returns>
 	/// <exception cref="InvalidOperationException">Thrown when <paramref name="required"/> is true
 	/// and the variable does not exist (or is in the wrong format).</exception>
@@ -56,8 +56,8 @@ public static class HyphenSdkEnvExtensions
 	/// <param name="env"/>
 	/// <param name="name">The environment variable name</param>
 	/// <param name="formatProvider">An object that supplies culture-specific parsing information.</param>
-	/// <param name="required">When <c>true</c> and the variable does not exist (or is in the wrong
-	/// format), will throw; when <c>false</c>, will return <c>null</c> instead.</param>
+	/// <param name="required">When <see langword="true"/> and the variable does not exist (or is in the wrong
+	/// format), will throw; when <see langword="false"/>, will return <see langword="null"/> instead.</param>
 	/// <returns>The value</returns>
 	/// <exception cref="InvalidOperationException">Thrown when <paramref name="required"/> is true
 	/// and the variable does not exist (or is in the wrong format).</exception>
@@ -80,8 +80,8 @@ public static class HyphenSdkEnvExtensions
 	/// <param name="env"/>
 	/// <param name="name">The environment variable name</param>
 	/// <param name="numberStyles">A bitwise combination of enumeration values that indicates the permitted format.</param>
-	/// <param name="required">When <c>true</c> and the variable does not exist (or is in the wrong
-	/// format), will throw; when <c>false</c>, will return <c>null</c> instead.</param>
+	/// <param name="required">When <see langword="true"/> and the variable does not exist (or is in the wrong
+	/// format), will throw; when <see langword="false"/>, will return <see langword="null"/> instead.</param>
 	/// <returns>The value</returns>
 	/// <exception cref="InvalidOperationException">Thrown when <paramref name="required"/> is true
 	/// and the variable does not exist (or is in the wrong format).</exception>
@@ -102,8 +102,8 @@ public static class HyphenSdkEnvExtensions
 	/// </summary>
 	/// <param name="env"/>
 	/// <param name="name">The environment variable name</param>
-	/// <param name="required">When <c>true</c> and the variable does not exist (or is in the wrong
-	/// format), will throw; when <c>false</c>, will return <c>null</c> instead.</param>
+	/// <param name="required">When <see langword="true"/> and the variable does not exist (or is in the wrong
+	/// format), will throw; when <see langword="false"/>, will return <see langword="null"/> instead.</param>
 	/// <returns>The value</returns>
 	/// <exception cref="InvalidOperationException">Thrown when <paramref name="required"/> is true
 	/// and the variable does not exist (or is in the wrong format).</exception>
@@ -126,8 +126,8 @@ public static class HyphenSdkEnvExtensions
 	/// <param name="env"/>
 	/// <param name="name">The environment variable name</param>
 	/// <param name="formatProvider">An object that supplies culture-specific parsing information.</param>
-	/// <param name="required">When <c>true</c> and the variable does not exist (or is in the wrong
-	/// format), will throw; when <c>false</c>, will return <c>null</c> instead.</param>
+	/// <param name="required">When <see langword="true"/> and the variable does not exist (or is in the wrong
+	/// format), will throw; when <see langword="false"/>, will return <see langword="null"/> instead.</param>
 	/// <returns>The value</returns>
 	/// <exception cref="InvalidOperationException">Thrown when <paramref name="required"/> is true
 	/// and the variable does not exist (or is in the wrong format).</exception>
@@ -150,8 +150,8 @@ public static class HyphenSdkEnvExtensions
 	/// <param name="env"/>
 	/// <param name="name">The environment variable name</param>
 	/// <param name="numberStyles">A bitwise combination of enumeration values that indicates the permitted format.</param>
-	/// <param name="required">When <c>true</c> and the variable does not exist (or is in the wrong
-	/// format), will throw; when <c>false</c>, will return <c>null</c> instead.</param>
+	/// <param name="required">When <see langword="true"/> and the variable does not exist (or is in the wrong
+	/// format), will throw; when <see langword="false"/>, will return <see langword="null"/> instead.</param>
 	/// <returns>The value</returns>
 	/// <exception cref="InvalidOperationException">Thrown when <paramref name="required"/> is true
 	/// and the variable does not exist (or is in the wrong format).</exception>
@@ -172,8 +172,8 @@ public static class HyphenSdkEnvExtensions
 	/// </summary>
 	/// <param name="env"/>
 	/// <param name="name">The environment variable name</param>
-	/// <param name="required">When <c>true</c> and the variable does not exist (or is in the wrong
-	/// format), will throw; when <c>false</c>, will return <c>null</c> instead.</param>
+	/// <param name="required">When <see langword="true"/> and the variable does not exist (or is in the wrong
+	/// format), will throw; when <see langword="false"/>, will return <see langword="null"/> instead.</param>
 	/// <returns>The value</returns>
 	/// <exception cref="InvalidOperationException">Thrown when <paramref name="required"/> is true
 	/// and the variable does not exist (or is in the wrong format).</exception>
@@ -196,8 +196,8 @@ public static class HyphenSdkEnvExtensions
 	/// <param name="env"/>
 	/// <param name="name">The environment variable name</param>
 	/// <param name="formatProvider">An object that supplies culture-specific parsing information.</param>
-	/// <param name="required">When <c>true</c> and the variable does not exist (or is in the wrong
-	/// format), will throw; when <c>false</c>, will return <c>null</c> instead.</param>
+	/// <param name="required">When <see langword="true"/> and the variable does not exist (or is in the wrong
+	/// format), will throw; when <see langword="false"/>, will return <see langword="null"/> instead.</param>
 	/// <returns>The value</returns>
 	/// <exception cref="InvalidOperationException">Thrown when <paramref name="required"/> is true
 	/// and the variable does not exist (or is in the wrong format).</exception>
@@ -220,8 +220,8 @@ public static class HyphenSdkEnvExtensions
 	/// <param name="env"/>
 	/// <param name="name">The environment variable name</param>
 	/// <param name="numberStyles">A bitwise combination of enumeration values that indicates the permitted format.</param>
-	/// <param name="required">When <c>true</c> and the variable does not exist (or is in the wrong
-	/// format), will throw; when <c>false</c>, will return <c>null</c> instead.</param>
+	/// <param name="required">When <see langword="true"/> and the variable does not exist (or is in the wrong
+	/// format), will throw; when <see langword="false"/>, will return <see langword="null"/> instead.</param>
 	/// <returns>The value</returns>
 	/// <exception cref="InvalidOperationException">Thrown when <paramref name="required"/> is true
 	/// and the variable does not exist (or is in the wrong format).</exception>
@@ -242,8 +242,8 @@ public static class HyphenSdkEnvExtensions
 	/// </summary>
 	/// <param name="env"/>
 	/// <param name="name">The environment variable name</param>
-	/// <param name="required">When <c>true</c> and the variable does not exist (or is in the wrong
-	/// format), will throw; when <c>false</c>, will return <c>null</c> instead.</param>
+	/// <param name="required">When <see langword="true"/> and the variable does not exist (or is in the wrong
+	/// format), will throw; when <see langword="false"/>, will return <see langword="null"/> instead.</param>
 	/// <returns>The value</returns>
 	/// <exception cref="InvalidOperationException">Thrown when <paramref name="required"/> is true
 	/// and the variable does not exist (or is in the wrong format).</exception>
@@ -266,8 +266,8 @@ public static class HyphenSdkEnvExtensions
 	/// <param name="env"/>
 	/// <param name="name">The environment variable name</param>
 	/// <param name="formatProvider">An object that supplies culture-specific parsing information.</param>
-	/// <param name="required">When <c>true</c> and the variable does not exist (or is in the wrong
-	/// format), will throw; when <c>false</c>, will return <c>null</c> instead.</param>
+	/// <param name="required">When <see langword="true"/> and the variable does not exist (or is in the wrong
+	/// format), will throw; when <see langword="false"/>, will return <see langword="null"/> instead.</param>
 	/// <returns>The value</returns>
 	/// <exception cref="InvalidOperationException">Thrown when <paramref name="required"/> is true
 	/// and the variable does not exist (or is in the wrong format).</exception>
@@ -290,8 +290,8 @@ public static class HyphenSdkEnvExtensions
 	/// <param name="env"/>
 	/// <param name="name">The environment variable name</param>
 	/// <param name="numberStyles">A bitwise combination of enumeration values that indicates the permitted format.</param>
-	/// <param name="required">When <c>true</c> and the variable does not exist (or is in the wrong
-	/// format), will throw; when <c>false</c>, will return <c>null</c> instead.</param>
+	/// <param name="required">When <see langword="true"/> and the variable does not exist (or is in the wrong
+	/// format), will throw; when <see langword="false"/>, will return <see langword="null"/> instead.</param>
 	/// <returns>The value</returns>
 	/// <exception cref="InvalidOperationException">Thrown when <paramref name="required"/> is true
 	/// and the variable does not exist (or is in the wrong format).</exception>
