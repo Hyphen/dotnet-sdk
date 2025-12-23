@@ -25,7 +25,7 @@ public class EnvOptions
 	/// set) to be loaded.
 	/// </summary>
 	/// <remarks>
-	/// If this value remains unset, then <c>true</c> will be used.
+	/// If this value remains unset, then <see langword="true"/> will be used.
 	/// </remarks>
 	public bool? Local { get; set; } = true;
 

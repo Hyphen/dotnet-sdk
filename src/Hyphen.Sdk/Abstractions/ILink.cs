@@ -55,7 +55,7 @@ public interface ILink
 	/// <param name="shortCodeId">The short code ID. (Example: <c>"code_686bed403c3991bd676bba4d"</c>)</param>
 	/// <param name="qrCodeId">The QR code ID. (Example: <c>"lqr_66fc51fe144cf3a1bd2a35b1"</c>)</param>
 	/// <param name="cancellationToken">The cancellation token to cancel the request early</param>
-	/// <returns>Returns the QR code, if present; returns <c>null</c> for an unknown short code ID
+	/// <returns>Returns the QR code, if present; returns <see langword="null"/> for an unknown short code ID
 	/// or QR code ID or organization ID.</returns>
 	/// <exception cref="ApiKeyException">Thrown if the API key is not valid.</exception>
 	/// <exception cref="HttpStatusCodeException">Thrown if the API returned an unexpected status code.</exception>
@@ -67,7 +67,7 @@ public interface ILink
 	/// <param name="shortCodeId">The short code ID. (Example: <c>"code_686bed403c3991bd676bba4d"</c>)</param>
 	/// <param name="parms">Optional parameters for getting the list of QR codes.</param>
 	/// <param name="cancellationToken">The cancellation token to cancel the request early</param>
-	/// <returns>The list of QR codes that match the search options; returns <c>null</c> for an unknown
+	/// <returns>The list of QR codes that match the search options; returns <see langword="null"/> for an unknown
 	/// short code ID or organization ID.</returns>
 	/// <exception cref="ApiKeyException">Thrown if the API key is not valid.</exception>
 	/// <exception cref="HttpStatusCodeException">Thrown if the API returned an unexpected status code.</exception>
@@ -78,7 +78,7 @@ public interface ILink
 	/// </summary>
 	/// <param name="shortCodeId">The short code ID. (Example: <c>"code_686bed403c3991bd676bba4d"</c>)</param>
 	/// <param name="cancellationToken">The cancellation token to cancel the request early</param>
-	/// <returns>Returns the short code, if available; returns <c>null</c> for an unknown code or organization ID.</returns>
+	/// <returns>Returns the short code, if available; returns <see langword="null"/> for an unknown code or organization ID.</returns>
 	/// <exception cref="ApiKeyException">Thrown if the API key is not valid.</exception>
 	/// <exception cref="HttpStatusCodeException">Thrown if the API returned an unexpected status code.</exception>
 	Task<ShortCodeResult?> GetShortCode(string shortCodeId, CancellationToken cancellationToken);
@@ -88,7 +88,7 @@ public interface ILink
 	/// </summary>
 	/// <param name="parms">Optional parameters for getting the list of short codes.</param>
 	/// <param name="cancellationToken">The cancellation token to cancel the request early</param>
-	/// <returns>The list of short codes that match the search options; returns <c>null</c> for an unknown organization ID.</returns>
+	/// <returns>The list of short codes that match the search options; returns <see langword="null"/> for an unknown organization ID.</returns>
 	/// <exception cref="ApiKeyException">Thrown if the API key is not valid.</exception>
 	/// <exception cref="HttpStatusCodeException">Thrown if the API returned an unexpected status code.</exception>
 	Task<PagedResult<ShortCodeResult>?> GetShortCodes(GetShortCodesParams? parms, CancellationToken cancellationToken);
@@ -100,7 +100,7 @@ public interface ILink
 	/// <param name="startDate">The start date.</param>
 	/// <param name="endDate">The end date.</param>
 	/// <param name="cancellationToken">The cancellation token to cancel the request early</param>
-	/// <returns>The statistics for the given short code, if present; returns <c>null</c>
+	/// <returns>The statistics for the given short code, if present; returns <see langword="null"/>
 	/// for an unknown short code ID or organization ID.</returns>
 	/// <exception cref="ApiKeyException">Thrown if the API key is not valid.</exception>
 	/// <exception cref="HttpStatusCodeException">Thrown if the API returned an unexpected status code.</exception>
@@ -110,7 +110,7 @@ public interface ILink
 	/// Gets a list of all the tags used by the organization's short codes.
 	/// </summary>
 	/// <param name="cancellationToken">The cancellation token to cancel the request early</param>
-	/// <returns>The combined list of tags, if present; returns <c>null</c> for an unknown organization ID.</returns>
+	/// <returns>The combined list of tags, if present; returns <see langword="null"/> for an unknown organization ID.</returns>
 	/// <exception cref="ApiKeyException">Thrown if the API key is not valid.</exception>
 	/// <exception cref="HttpStatusCodeException">Thrown if the API returned an unexpected status code.</exception>
 	Task<string[]?> GetTags(CancellationToken cancellationToken);
