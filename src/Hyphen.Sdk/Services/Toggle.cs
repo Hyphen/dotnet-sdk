@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http.Json;
 using System.Runtime.Caching;
 using Hyphen.Sdk.Resources;
@@ -94,7 +95,7 @@ internal class Toggle : BaseService, IToggle, IDisposable
 			CustomAttributes = context?.CustomAttributes,
 			Environment = Environment,
 			IPAddress = context?.IPAddress,
-			TargetingKey = context?.TargetingKey ?? context?.User?.Id ?? DefaultTargetingKey,
+			TargetingKey = GetTargetingKey(context),
 			User = context?.User,
 		};
 
@@ -145,7 +146,7 @@ internal class Toggle : BaseService, IToggle, IDisposable
 							? JsonSerializer.Deserialize<T>(toggle.Value.Value.GetString()!)
 							: toggle.Value.Value.Deserialize<T>();
 
-				return new() { Key = toggleKey, Reason = toggle.Reason, Value = value };
+				return new() { Key = toggle.Key, Reason = toggle.Reason, Value = value };
 			}
 			catch (TaskCanceledException)
 			{
@@ -180,6 +181,11 @@ internal class Toggle : BaseService, IToggle, IDisposable
 		};
 	}
 
+	[ExcludeFromCodeCoverage]
+	string GetTargetingKey(ToggleContext? context) =>
+		context?.TargetingKey ?? context?.User?.Id ?? DefaultTargetingKey;
+
+	[ExcludeFromCodeCoverage]
 	static IReadOnlyCollection<Uri> NormalizeUris(IEnumerable<Uri> uris) =>
 		[.. uris.Select(uri => uri.ToString().EndsWith('/') ? uri : new Uri(uri + "/"))];
 }

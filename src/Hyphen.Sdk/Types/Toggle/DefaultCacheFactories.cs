@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Caching;
 
 namespace Hyphen.Sdk;
@@ -20,6 +21,7 @@ public static class DefaultCacheFactories
 	/// <item><c>"{toggleKey}"</c></item>
 	/// </list>
 	/// </remarks>
+	[ExcludeFromCodeCoverage]
 	public static string KeyFactory(string toggleKey, ToggleContext? context) =>
 		context?.User?.CacheKey is not null
 			? $"{toggleKey}-{context.User.CacheKey}"
