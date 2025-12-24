@@ -51,6 +51,20 @@ public static class HyphenSdkServiceCollectionExtensions
 		return services;
 	}
 
+	/// <summary>
+	/// Adds the <see cref="IToggle"/> service to the <see cref="IServiceCollection"/>.
+	/// </summary>
+	/// <param name="services"/>
+	/// <returns>The <see cref="IServiceCollection"/>.</returns>
+	public static IServiceCollection AddToggle(this IServiceCollection services)
+	{
+		Guard.ArgumentNotNull(services)
+			.RegisterDependencies()
+			.TryAddSingleton<IToggle, Toggle>();
+
+		return services;
+	}
+
 	static IServiceCollection RegisterDependencies(this IServiceCollection services) =>
 		services
 			.AddOptions()

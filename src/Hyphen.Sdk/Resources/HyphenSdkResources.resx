@@ -159,4 +159,16 @@
   <data name="Link_QrCodeInvalidFormat" xml:space="preserve">
     <value>While attempting to decode the QrCode value, it was in an unsupported format.</value>
   </data>
+  <data name="ProjectPublicKey_Required" xml:space="preserve">
+    <value>Project public key is required. Please provide it via options or set the HYPHEN_PROJECT_PUBLIC_KEY environment variable.</value>
+  </data>
+  <data name="ProjectPublicKey_MustBePublic" xml:space="preserve">
+    <value>The provided project public key must be a public API key (it should start with "public_").</value>
+  </data>
+  <data name="ProjectPublicKey_Malformed" xml:space="preserve">
+    <value>The provided public key appears to be malformed. Please verify the public key value.</value>
+  </data>
+  <data name="Toggle_ApplicationIdRequired" xml:space="preserve">
+    <value>Application ID is required. Please provide it via options or set the HYPHEN_APP_ID environment variable.</value>
+  </data>
 </root>

@@ -11,9 +11,11 @@ namespace Hyphen.Sdk;
 internal partial class Env : BaseService, IEnv
 {
 	public const string ApiKey = "HYPHEN_API_KEY";
+	public const string AppId = "HYPHEN_APP_ID";
 	public const string AppEnvironment = "HYPHEN_APP_ENVIRONMENT";
 	public const string Dev = "HYPHEN_DEV";
 	public const string OrganizationId = "HYPHEN_ORGANIZATION_ID";
+	public const string ProjectPublicKey = "HYPHEN_PROJECT_PUBLIC_KEY";
 
 	const string NameRegexPattern =
 		/* lang=regex */ @"^([a-zA-Z_]+[a-zA-Z0-9_]*)\s*=\s*(.*?)$";

@@ -12,6 +12,7 @@ The Hyphen .NET SDK is a .NET library that allows developers to easily integrate
 - [Secret Management Service](https://hyphen.ai/env) ("ENV")
 - [Short Code Service](https://hyphen.ai/link) ("Link")
 - [Geo Information Service](https://hyphen.ai/net-info) ("net-info")
+- [Feature Flag Service](https://hyphen.ai/toggle) ("Toggle")
 
 The library is compatible with .NET Standard 2.0 and .NET 8.
 
@@ -32,6 +33,10 @@ The library is compatible with .NET Standard 2.0 and .NET 8.
     - [Adding net-info](#adding-net-info)
     - [Configuring net-info](#configuring-net-info)
     - [Using net-info](#using-net-info)
+  - [Toggle (Feature Flag Service)](#toggle-feature-flag-service)
+    - [Adding Toggle](#adding-toggle)
+    - [Configuring Toggle](#configuring-toggle)
+    - [Using Toggle](#using-toggle)
 - [Contributing](#contributing)
 - [License and Copyright](#license-and-copyright)
 
@@ -237,8 +242,8 @@ Several APIs return one or more `ShortCodeResult` instances, which include the f
 
 Property       | Description
 ---------------|------------
-`Code`         | The "code" portion of the short link (i.e.,`"abc123"` from `https://domain.com/abc123`)
-`Domain`       | The "domain" portion of the short link (i.e., `"domain.com"` from `https://domain.com/abc123`)
+`Code`         | The "code" portion of the short link (e.g.,`"abc123"` from `https://domain.com/abc123`)
+`Domain`       | The "domain" portion of the short link (e.g., `"domain.com"` from `https://domain.com/abc123`)
 `Id`           | The ID of the short code (in `code_123456789012345678901234` format)
 `LongUrl`      | The URL that the short code sends users to
 `Organization` | The organization that owns the short code
@@ -328,6 +333,76 @@ Property       | Description
 The `Location` value includes the latitude/longitude, region information (country/region/city/postal code) and time zone (in TZ identifier form like `America/New_York`, suitable for passing to [`TimeZoneInfo.FindSystemTimeZoneById`](https://learn.microsoft.com/dotnet/api/system.timezoneinfo.findsystemtimezonebyid)).
 
 _Note that some geographic mappings are relatively precise and will include all the information, while others may be missing one or more fields. In this case, the specific location properties may be empty rather than filled._
+
+## Toggle (Feature Flag Service)
+
+The Hyphen .NET SDK provides an `IToggle` service interface which allows you to evaluate feature flags in your application. You can read more about it:
+
+* [WebSite](https://hyphen.ai/toggle)
+* [Quick Start Guide](https://docs.hyphen.ai/docs/toggle-quickstart)
+
+### Adding Toggle
+
+Add the `IToggle` service to your application:
+
+```csharp
+builder.Services.AddToggle();
+```
+
+### Configuring Toggle
+
+The `ToggleOptions` class has the following properties that can be used to configure Toggle:
+
+Property              | Description
+----------------------|------------
+`ApplicationId`       | Sets the application ID for the evaluation (defaults to the value in environment variable `HYPHEN_APP_ID` if not set)
+`BaseUris`            | Sets the base URIs for evaluation requests (defaults to `https://{OrganizationId}.toggle.hyphen.cloud` and `https://toggle.hyphen.cloud` if not set)
+`CacheKeyFactory`     | Sets the cache key algorithm (defaults to cache keys that include the toggle key + either the user ID or the user email address)
+`CachePolicyFactory`  | Sets the cache policy algorithm (defaults to caching evaluations for 30 seconds)
+`DefaultContext`      | Sets the default context for the evaluation request (see the `ToggleContext` description below)
+`DefaultTargetingKey` | Sets the default targeting key (defaults to `{ApplicationId}-{Environment}-{RandomValue]` if not set)
+`Environment`         | Sets the runtime environment (defaults to `development` if not set)
+`ProjectPublicKey`    | Sets the project public key for the evaluation requests (defaults to the value in environment variable `HYPHEN_PROJECT_PUBLIC_KEY` if not set)
+
+The `ToggleContext` object contains the context used by the evaluation engine. It contains the following properties:
+
+Property           | Description
+-------------------|------------
+`CustomAttributes` | Set this to send custom attributes
+`IPAddress`        | Set this to send an IP address
+`TargetingKey`     | Set this to send a specific targeting key
+`User`             | Set this to describe the current application user
+
+### Using Toggle
+
+The `IToggle` interface contains a single method: `Evaluate`. Every evaluation requires a toggle key to request, and optionally allows you to specify the default value to be used if the evaluation fails. You can also configure the request using `EvaluateParams`, which contains the following properties:
+
+Property  | Description
+----------|------------
+`Cache`   | Set this to enable or disable caching of the evaluation
+`Context` | Set this to override the `ToggleContext` used to make the evaluation request
+
+The `Evaluate` methods are generic, and the generic type will be expected type of the evaluation value (e.g., if you are expecting a boolean result from the evaluation, you would call `Evaluate<bool>`).
+
+The fundamental types supported by Toggle map onto the following .NET types:
+
+Toggle Type | .NET Type(s)
+------------|-------------
+`boolean`   | `bool`
+`object`    | Any custom object type that can be deserialized from the JSON returned by the evaluation (*)
+`number`    | Any numeric type (e.g., `int`, `long`, `float`, `double`, `decimal`, etc.)
+`string`    | `string`
+
+_(*) If the object type does not map to a single object shape, you can request it with `Evaluate<string>` and then perform any post-processing on the result that is appropriate for your application._
+
+The return type from `Evaluate<T>` is `ToggleEvaluation<T?>`, which has the following properties:
+
+Property    | Description
+------------|------------
+`Exception` | Contains the exception that occurred while processing the evaluation (if any)
+`Key`       | Contains the key of the toggle request
+`Reason`    | Contains the reason for the returned value
+`Value`     | Contains the value of the evaluation
 
 # Contributing
 
