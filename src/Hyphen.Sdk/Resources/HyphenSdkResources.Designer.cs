@@ -185,5 +185,41 @@ namespace Hyphen.Sdk.Resources {
                 return ResourceManager.GetString("OrganizationId_Required", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The provided public key appears to be malformed. Please verify the public key value..
+        /// </summary>
+        internal static string ProjectPublicKey_Malformed {
+            get {
+                return ResourceManager.GetString("ProjectPublicKey_Malformed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The provided project public key must be a public API key (it should start with &quot;public_&quot;)..
+        /// </summary>
+        internal static string ProjectPublicKey_MustBePublic {
+            get {
+                return ResourceManager.GetString("ProjectPublicKey_MustBePublic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project public key is required. Please provide it via options or set the HYPHEN_PROJECT_PUBLIC_KEY environment variable..
+        /// </summary>
+        internal static string ProjectPublicKey_Required {
+            get {
+                return ResourceManager.GetString("ProjectPublicKey_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Application ID is required. Please provide it via options or set the HYPHEN_APP_ID environment variable..
+        /// </summary>
+        internal static string Toggle_ApplicationIdRequired {
+            get {
+                return ResourceManager.GetString("Toggle_ApplicationIdRequired", resourceCulture);
+            }
+        }
     }
 }
