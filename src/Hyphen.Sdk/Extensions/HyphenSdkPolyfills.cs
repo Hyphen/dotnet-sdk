@@ -1,8 +1,7 @@
 using System.Drawing;
 using System.Globalization;
-using Hyphen.Sdk;
 
-namespace System;
+namespace Hyphen.Sdk;
 
 internal static class HyphenSdkPolyfills
 {
