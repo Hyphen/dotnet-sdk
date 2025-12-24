@@ -75,14 +75,6 @@ public class QrCodeResult
 	/// The QR code images are in PNG format, so it is recommended that the file name end with <c>".png"</c>.
 	/// </remarks>
 	[ExcludeFromCodeCoverage]  // Not testing due to file I/O (and simple implementation)
-	public Task SaveQrCode(string fileName, CancellationToken cancellationToken)
-	{
-#if NETSTANDARD
-		cancellationToken.ThrowIfCancellationRequested();
-		File.WriteAllBytes(fileName, GetQrCodeBytes());
-		return Task.CompletedTask;
-#else
-		return File.WriteAllBytesAsync(fileName, GetQrCodeBytes(), cancellationToken);
-#endif
-	}
+	public Task SaveQrCode(string fileName, CancellationToken cancellationToken) =>
+		File.WriteAllBytesAsync(fileName, GetQrCodeBytes(), cancellationToken);
 }

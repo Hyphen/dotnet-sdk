@@ -26,7 +26,7 @@ internal static class HyphenSdkResourcesExtensions
 				env_InvalidValueComposite,
 #endif
 				name,
-				value.Quoted()
+				value.Quoted
 			);
 
 		public static string Env_InvalidValueType(string name, string typeName, string? value) =>
@@ -39,7 +39,7 @@ internal static class HyphenSdkResourcesExtensions
 #endif
 				name,
 				typeName,
-				value.Quoted()
+				value.Quoted
 			);
 
 		public static string Http_StatusCodeError(HttpStatusCode statusCode) =>

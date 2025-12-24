@@ -120,7 +120,7 @@ public class EnvTests
 
 			Assert.Empty(logger.Messages);
 			Assert.Collection(
-				helper.SetEnvValues.OrderBy(kvp => kvp.Key).Select(kvp => $"{kvp.Key} = {kvp.Value.Quoted()}"),
+				helper.SetEnvValues.OrderBy(kvp => kvp.Key).Select(kvp => $"{kvp.Key} = {kvp.Value.Quoted}"),
 				item => Assert.Equal(@"BACK_QUOTED = ""Value""", item),
 				item => Assert.Equal(@"BACK_QUOTED_ALT = ""Value# not a comment""", item),
 				item => Assert.Equal(@"BACK_QUOTED_JSON = ""{ ""foo"": ""2112"" }""", item),
@@ -174,7 +174,7 @@ public class EnvTests
 
 			Assert.Empty(logger.Messages);
 			Assert.Collection(
-				helper.SetEnvValues.OrderBy(kvp => kvp.Key).Select(kvp => $"{kvp.Key} = {kvp.Value.Quoted()}"),
+				helper.SetEnvValues.OrderBy(kvp => kvp.Key).Select(kvp => $"{kvp.Key} = {kvp.Value.Quoted}"),
 				item => Assert.Equal(@"GLOBAL = ""bar""", item),
 				item => Assert.Equal(@"LOCAL = ""biff""", item),
 				item => Assert.Equal(@"OVERRIDE = ""baz""", item)
@@ -208,7 +208,7 @@ public class EnvTests
 
 			Assert.Empty(logger.Messages);
 			Assert.Collection(
-				helper.SetEnvValues.OrderBy(kvp => kvp.Key).Select(kvp => $"{kvp.Key} = {kvp.Value.Quoted()}"),
+				helper.SetEnvValues.OrderBy(kvp => kvp.Key).Select(kvp => $"{kvp.Key} = {kvp.Value.Quoted}"),
 				item => Assert.Equal(@"NAME1 = ""global""", item),
 				item => Assert.Equal(@"NAME2 = ""local""", item),
 				item => Assert.Equal(@"NAME3 = ""environment""", item),
