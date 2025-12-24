@@ -218,7 +218,7 @@ internal partial class Env : BaseService, IEnv
 		if (required)
 			throw new ArgumentException(HyphenSdkResources.Env_InvalidValueType(name, typeName, value), nameof(name));
 
-		Logger.LogWarning(HyphenSdkResources.Env_InvalidValueTypeFmt, name, typeName, value.Quoted());
+		Logger.LogWarning(HyphenSdkResources.Env_InvalidValueTypeFmt, name, typeName, value.Quoted);
 		return null;
 	}
 
