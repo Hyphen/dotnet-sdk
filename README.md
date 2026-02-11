@@ -126,6 +126,7 @@ The service instance types (and their configuration options object) include:
 > ENV      | `IEnv`     | `EnvOptions`
 > Link     | `ILink`    | `LinkOptions`
 > net-info | `INetInfo` | `NetInfoOptions`
+> Toggle   | `IToggle`  | `ToggleOptions`
 
 For more information on these patterns, see the Microsoft documentation:
 
