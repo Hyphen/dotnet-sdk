@@ -111,7 +111,9 @@ internal class Toggle : BaseService, IToggle, IDisposable
 				var response = await httpClient.PostAsJsonAsync(uri, evaluationContext, cancellationToken: cancellationToken).ConfigureAwait(false);
 				if (!response.IsSuccessStatusCode)
 				{
-					Logger.LogInformation("Request to {Uri} resulted in HTTP status code {StatusCode}", uri.ToString(), (int)response.StatusCode);
+					if (Logger.IsEnabled(LogLevel.Information))
+						Logger.LogInformation("Request to {Uri} resulted in HTTP status code {StatusCode}", uri.ToString(), (int)response.StatusCode);
+
 					continue;
 				}
 
@@ -124,13 +126,15 @@ internal class Toggle : BaseService, IToggle, IDisposable
 				var body = await JsonSerializer.DeserializeAsync<ToggleEvaluationResponse200>(stream, cancellationToken: cancellationToken).ConfigureAwait(false);
 				if (body is null || body.Toggles is null)
 				{
-					Logger.LogInformation("Request to {Uri} resulted in an unparseable HTTP response", uri.ToString());
+					if (Logger.IsEnabled(LogLevel.Information))
+						Logger.LogInformation("Request to {Uri} resulted in an unparseable HTTP response", uri.ToString());
 					continue;
 				}
 
 				if (!body.Toggles.TryGetValue(toggleKey, out var toggle) || toggle.Value is null)
 				{
-					Logger.LogInformation("Request to {Uri} returned a toggle set that did not include toggle key '{ToggleKey}'", uri.ToString(), toggleKey);
+					if (Logger.IsEnabled(LogLevel.Information))
+						Logger.LogInformation("Request to {Uri} returned a toggle set that did not include toggle key '{ToggleKey}'", uri.ToString(), toggleKey);
 					continue;
 				}
 
@@ -159,7 +163,8 @@ internal class Toggle : BaseService, IToggle, IDisposable
 			}
 			catch (JsonException)
 			{
-				Logger.LogInformation("Request to {Uri} resulted in an unparseable HTTP response", uri.ToString());
+				if (Logger.IsEnabled(LogLevel.Information))
+					Logger.LogInformation("Request to {Uri} resulted in an unparseable HTTP response", uri.ToString());
 			}
 			catch (Exception ex)
 			{
